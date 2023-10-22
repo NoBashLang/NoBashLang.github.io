@@ -19,7 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 title: NoBash
-email: "nobashlang@hotmail.com"
+email: nobashlang@hotmail.com
 description: "NoBash lang"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
@@ -28,8 +28,8 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 theme: minima
-# plugins:
-   - jekyll-toc
+#plugins:
+#   - jekyll-toc
 #  - jekyll-feed
 markdown: kramdown
 
