@@ -32,8 +32,6 @@ theme: minima
    - jekyll-toc
 #  - jekyll-feed
 markdown: kramdown
-highlighter: rouge
-	input: GFM
 
 
 # Exclude from processing.
