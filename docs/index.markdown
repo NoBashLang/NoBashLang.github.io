@@ -1,9 +1,15 @@
 # NoBash - Creating a programming language
+
 *How does one create a programming language?
+
 Matura Paper 2023 
+
 Christopher Hranov, G6e
+
 School: Freies Gymnasium Zürich
+
 Supervisor: Aaron Zeller
+
 Co-supervisor: Anna Höpli
 
 ![](logo.png)
