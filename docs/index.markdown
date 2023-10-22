@@ -77,7 +77,7 @@ This section aims not to teach the reader how to program in any language fully. 
 
 ## Functions
 Suppose the year is 2030, and you just bought yourself a humanoid robot that will complete various tasks for you. All you have to do is write the different chores down on a piece of paper and feed it into the robot, and it will do them for you. Here is such a list:
-```Python
+```python
 do the laundry 
 make a coffee
 wake me up
