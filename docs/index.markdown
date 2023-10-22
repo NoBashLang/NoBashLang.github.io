@@ -1,4 +1,6 @@
-# NoBash - Creating a programming language
+---
+title: NoBash - Creating a programming language
+---
 
 *How does one create a programming language?*
 
