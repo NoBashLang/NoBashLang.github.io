@@ -98,7 +98,7 @@ This makes it clear that Google is an argument. We can also remove all spaces to
 It should be noted that functions can have multiple arguments. For example, the `driveMeToWork` function may require two things: Where you work and what time you need to arrive. When the engineers built the robot, they had to define in which order which argument does what. In our case, they defined the first argument as the location. The second argument, on the other hand, will always be the time. Both arguments are written in brackets but with a comma dividing them. This leaves us with the following line: 
 `driveMeToWork(Google, 9:00am)
 When we apply this to all other instructions (and leave the brackets empty if the function does not require any arguments):
-```Python
+```python
 doTheLaundry() 
 makeACoffee()
 wakeMeUp()
@@ -121,16 +121,16 @@ At this point, the robot would call the second function `say` and tell you the c
 
 ## Variables
 Let us introduce a new function called `tell`. Tell operates virtually the same way that `say` does, but it takes a second argument specifying to whom it should say the first. Here is an example of this:
-```Python
+```python
 tell(me, Good monring!)
 tell(Alice, Good monring!)
 ```
 The robot should tell you and Alice, "Good morning!". However, as you may have spotted already, we mistyped "morning" and wrote "monring" instead. If we were to extend this program to wish everyone we know a good morning, we would have to correct this error hundreds of times. Additionally, we may have avoided making a typo, but we wanted to change our message for another reason. Either way, there are more elegant solutions. Instead, we should use variables. These work just like in math. We can define a variable using an equal sign. The letter or word to the left is the variable, and everything to the right is the variable:
-```Python
+```python
 message = Good morning!
 ```
 Instead of writing out the message everywhere now, we can instead give the variable name:
-```Python
+```python
 message = Good morning!
 tell(me, message)
 tell(Alice, message)
@@ -158,7 +158,7 @@ If, instead, we wanted to get the age of Alice in the dictionary shown above sav
 An essential feature of programming is control flow constructs. Although they may vary slightly from language to language, these are the three most common control flow tools: `if`/`else`/`elif`, `for`, and `while`. It should be said that Python uses "elif" while many other languages use "else if". These are called "control flow constructions" as they change (*control*) the order and execution (*flow*) of all functions that are a part of it (part of the *construction*)
 ### If, Else and Elif
 The robot should not drive you to work on Sunday. Additionally, you only have to be at work at 10:00 a.m. rather than 9:00 a.m. on Thursdays. With the current construction, the robot would drive you to work at the same time every day. The function `getDayOfTheWeek` returns the day of the week. Let us add a check which only drives us if today is not Sunday. This time, let us look at the code first and break it down after:
-```Python
+```python
 if getDayOfTheWeek() != "Sunday":
 	driveMeToWork("Google", "9:00 a.m.")
 	say("Have fun at work!")
@@ -172,7 +172,7 @@ Assuming that today is Monday, the function would return this, and the line woul
 In programming, `==` means "is the same", `!=` not the same, `>` greater than, `>=` greater than or equal to, `<` smaller than, `<=` smaller than or equal to. One thing to mention is that both `=` and `==` exist in programming. The difference is that `=` is used to set a variable, and `==` is used only to check whether two things are equal. In our example, we are therefore comparing whether or not `"Monday"` and `"Sunday"` are different or not. They are not the same; therefore, the check passes, and we get a result of the `True` boolean. If both values had been the same, the check would have failed since they are not different. The line, therefore, looks as follows:
 `if True:`
 Now, `if` checks whether or not `True` is true, or, in other words, if the previous check has passed. It has, and therefore we move on to the consequent. In this case, the consequent contains function calls to drive us to work and say bye. These functions are then called. If the condition was not met, in which case it is Sunday, all lines that are indented are skipped over, and we are not driven to work. Nevertheless, we are still met with the problem of coming to work later than usual. Let me restructure the example and add two more conditions: `elif` and `else`:
-```Python
+```python
 day = getDayOfTheWeek()
 if day == "Sunday":
 	say("It's Sunday, no work for you! Have fun!")
@@ -184,7 +184,7 @@ else:
 	driveMeToWork("Google", "9:00 a.m.")
 ```
 In this example, we first check whether it is Sunday or not. If it is, the robot tells us to have fun on our day off. Then, we move on to an `elif`. The `elif` is like an `if` statement, except it only runs the check if the previous `if` and `elif's` failed. It knows that they are linked up since they are in a line. Here is an example outlining this:
-```Python
+```python
 if True:          # If number one
 	...
 elif True:        # Elif number one
@@ -196,7 +196,7 @@ elif True:        # Elif number two
 	...
 ```
 In our example, it may not be apparent why we can't just use another `if` condition. This is a valid point, so here is another example which demonstrates why the `elif` is so important:
-```Python
+```python
 x = 5
 if x < 10: # If x is smaller than ten
 	say("x is smaller than ten!")
@@ -206,7 +206,7 @@ elif x < 20: # If x is smaller than 20!
 In this case, we only want the `elif` condition only to work if the previous one failed. If we used an `if` comparison instead of `elif`, both `if`s would run as 5 is smaller than 10 and twenty. This would not work as we want the second condition only to pass if `x` is larger than ten but smaller than twenty. By using an `elif`, because the first condition would be true, the `elif` would not run. If the first condition was false but `x` is smaller than 20, the `elif` check would pass. In such cases it is imperative that a condition may only pass if the latter didn't.
 
 You may have noticed the pound symbols followed by some text in this code snippet. The pound symbols indicate a comment. Them and all subsequent text is marked as a "comment" and the robot safely skips over them. They are meant to leave messages to you and other programmers to explain what your code does. In this example, the comments number each condition. In `if` and `elif` number one, the `if` condition is met (as it is `True`). The `elif` construction, even though it is also met, does not run. This may make more sense with the name other languages give it: `else if`. In other words: "Check if all previous conditions were met. *Else*, if they were not, check *if* this one is met". This also leads us to the third and final conditional, the `else`. While the `elif` still checks whether its condition was met or not, the `else` runs if all previous checks failed, like so:
-```Python
+```python
 # This else will run
 if False:
 	...
@@ -228,14 +228,14 @@ else:
 
 ### For
 In a previous example, we have looked at saying "Good morning!" to multiple people and at lists. Instead of copying a line and changing the name of each individual to greet them, we can automate this process. Let us look at an example of what *not* to do:
-```Python
+```python
 tell("me", message)
 tell("Alice", message)
 # insert 50 more messages)
 tell("Bob", message)
 ```
 As you can see by the comment, this task could become 53 messages long and would take a long time to write. Worse yet, if you want to change something, like have the robot say two messages to someone, you would have to edit every single line or write another 53 lines. This is why programmers are told never to copy-paste code very early on. Instead, they should write it once and call it several times using programming logic. Instead, let us use a `for`-loop. First, we will have to create a list with all the names as follows:
-```Python
+```python
 names = ["me", "Alice", "Bob"]
 for name in names:
 	tell(name, message)
@@ -246,7 +246,7 @@ Again, just like with the conditionals, the `for` and the semicolon indicate tha
 
 ### While
 Now that we have looked at `if` and `for`, `while` can be seen as a mixture of the two. Here is a slightly more example in which the robot counts to 100:
-```Python
+```python
 x = 1
 while x != 100:
 	say(x)
@@ -257,7 +257,7 @@ In the first line, a new variable `x` is set equal to one. Then, a while loop is
 
 ## Defining functions
 Again and again, we have encountered reasons why we should refrain from repeating code. We have used variables to save different values and loops to repeat consecutive lines. Nevertheless, one case is not been accounted for yet:
-```Python
+```python
 wakeMeUp()
 # make me breakfast, but there is no function for this
 cleanTheHouse()
@@ -266,7 +266,7 @@ walkTheDog()
 # make me dinner, but there is no function for this
 ```
 As the comments say, the robot currently has no function to cook anything. What it does have, however, are the following functions: `startStove`, `stopStove`, `putInPan` (which takes a food as an argument to put in the pan), `prepareFoodForPan` (which takes a food as an argument again), `serveFood` and `letPanSit`. So, if we wanted to cook some eggs for breakfast, we could write the following:
-```Python
+```python
 startStove()
 prepareFoodForPan("eggs")
 putInPan("eggs")
@@ -275,7 +275,7 @@ stopStove()
 serveFood()
 ```
 However, this would be quite a lot of code to repeat three times, once for each meal in the day. We also cannot use a `for` or `while` loop this time since there is some code in between the cooking (`cleanTheHouse()` and `walkTheDog()`), which we do not want to add into the loop. Instead, we will create our own function. Previously, we have always only called functions, but they can also be defined. A function is just a collection of code that can be run anytime. Let us define this function for cooking eggs in Python:
-```Python
+```python
 def cookEggs():
 	startStove()
 	prepareFoodForPan("eggs")
@@ -285,7 +285,7 @@ def cookEggs():
 	serveFood()
 ```
 Just like with the control flow constructs, we must first use a keyword (like `if` or `for`) to tell the robot that this line will define (hence: `def`) a new function. This makes sense as we tell the computer what this function entails (or *define* what it will do). Next, we must write the function name, `cookEggs` in our case. It does not matter what you call the function, but it is easier to understand the code if you choose something descriptive. We then add two brackets, as if we were calling the function, and end the line using the colon we have seen before. Then, we indent all subsequent lines which should be a part of the function. We are finally done writing our function and can finally call it. This is done just as we have been doing it with functions we have not defined ourselves. Here is an example of us asking the robot to cook eggs four times:
-```Python
+```python
 cookEggs()
 cookEggs()
 cookEggs()
@@ -293,7 +293,7 @@ cookEggs()
 While eating eggs is fine for breakfast, we want to eat something else for lunch and dinner. Let us add arguments to our function to change what we want to cook dynamically. To do this, we will have to change the function definition a little bit:
 `def cookFood(food):`
 We added ' food ' inside the brackets, where arguments usually go when calling a function. We also renamed the function to be more general, as we want to cook more than just eggs now. `food` is now a parameter. When we pass a value to a function when calling it, this value is an `argument`. When we define a function and tell it to accept a value, this value is stored in a variable called a `parameter`. It is easiest to demonstrate this using our above example:
-```Python
+```python
 def cookFood(food):
 	[...] # Code was left out for readability
 	prepareFoodForPan(food)
@@ -304,7 +304,7 @@ cookFood("eggs")
 Here, we can see the `cookFood` function being defined along with one parameter: `food`. Inside the function, `prepareFoodForPan` is called, and an argument is passed. This argument is `food`. `food` is a variable. Specifically, it is a parameter of the function. Finally, `cookFood` is called along with `"eggs"` as a parameter. All the code inside `cookFood` is called when the function is called. Additionally, inside `cookFood`, a new variable exists, `food`. Food contains `"eggs"`, as it was passed to the function as an argument. If you want to pass more than one argument, you can also add more parameters as such:
 `def cookFood(food, time):` and `cookFood("eggs", "12mins")`
 Since we used parameters to cook various dishes, let us see this in action:
-```Python
+```python
 def cookFood(food):
 	[...]
 	prepareFoodForPan(food)
@@ -318,7 +318,7 @@ walkTheDog()
 cookFood("steak")
 ```
 In this example, all the code contained in `cookFood` will run three times. First, the robot will wake you up. The first time `cookFood` is run, `food` will be `"eggs"`. `food` is then passed on to `prepareFoodForPan`, so the robot will prepare eggs. It will then clean the house. The second time the robot cooks something, we pass `"fish"` as an argument, which is saved in the `food` variable (or parameter). The third meal will be a steak. Finally, let us take a look at return values. We have already seen that functions can return something, like how `whatDateToday()` gives us the current date. We can do the same in our function. Let us introduce a new function, `checkFridge`. This function takes one type of food as an argument and checks whether you have it in your fridge. After all, you cannot cook what you do not have. If you do not have the food, it will return `False`; otherwise, it will return `True`. So, let us introduce a check to see whether or not you have the food you want to eat and tell us if something went wrong:
-```Python
+```python
 def cookFood(food):
 	if checkFridge(food) == False:
 		return "We don't have the food!", "Sorry!"
@@ -332,7 +332,7 @@ say(resultTwo)
 We must use the `return` keyword here. Usually, we have to call functions using brackets. `return` is not a function, and we can omit the brackets. When `return` is used, the function will immediately exit, and we will continue with the code after the function call. As such, if `checkFridge` is false, we use `return` and do not execute any of the subsequent lines in `cookFood`. Additionally, we are returning two values in this case. The first is a message telling us that we no longer have that type of food, and the second tells us that the robot is sorry. If, on the other hand, the robot does find this food in the fridge, the return is *not* triggered, and the rest of the code is run. Functions automatically return when their end is reached, but we can also manually return and set return values. In this case, if the code has gotten this far, we know that everything went all right (as otherwise, we would have returned at the previous check for food availability). After we have returned, we save the two messages in two different variables as follows:
 `resultOne, resultTwo = cookFood("steak")`
 The first message, telling us whether everything went well, is stored in `resultOne` as it is also the first message to be returned in both cases. The second message containing "Sorry!" or "Enjoy!" is stored in `resultTwo` as those exclamations are the second values to be returned, and the variable is the second to the left. Here is a final example showing all of the orders of both parameters and return values:
-```Python
+```python
 def returnSomething(x, y, z):
 	return x, y, z
 
@@ -388,7 +388,7 @@ This can be read nearly like English: `"if 3 (is) in (the) line:"` If this compa
 `countThree = countThree + 1`
 `countThree += 1`
 As a comparison, here is this entire program written in Python:
-```Python
+```python
 countThree = 0
 countFive = 0
 
@@ -406,7 +406,7 @@ print("Fives:", countFive)
 ```
 
 In the previous chapter, we have been working with Python when programming the robot. However, there is one function we still need to cover. The robot has a "say" function, which makes the robot say something out loud. Python has the `print` function, which will output (or *print*) anything passed as one or more arguments to the screen. As previously mentioned, Python is not as tightly integrated with the operating system as Bash is. This is why reading the file is the most challenging part of the script: 
-```Python
+```python
 with open("numbers.txt", "r") as file:
 	data = file.readlines()
 ```
@@ -619,12 +619,12 @@ Compiling scripts would be redundant when the script hasn't changed from the las
 This level is comprised of many different parts, each of which gathers one piece of information, be it the hash, time, or MAC address. Some of the data can be gathered relatively easily, whereas others have some small hurdles to overcome. The data is then labeled and saved so that the MAC address is not accidentally confused for the hash later, for example. Finally, the collected data is returned back to the `compiler.py` file, which will write it to the instructions file in the final level.
 
 As a first step, we will create a `versions` file that will store the current version number of both the interpreter and the compiler. We will update the version numbers every time we release a new version of any of the NoBash programs. 
-```Python
+```python
 with open(path.expanduser("~")+"/.nobash/versions.json", "r") as f:
 	data = json.load(f)
 ```
 As a next step, we will create a function `getFileHash`. It will read the code file in a bytes format instead of as a string. Then, in blocks, it will read the file and finally hash it with the "sha256" algorithm using the `hashlib` library. Libraries are code you can import into your own project so that you do not have to implement the logic yourself. Many programmers will want to hash something, so it would be redundant for each individual to have to implement hashing themselves. Instead, one programmer writes the code needed to hash something and saves it in a "library". Other programmers can then download it and use the code contained within it. The `hashlib` library makes creating this level a lot easier for us, as we do not have to implement any of the hashing logic on our own:
-```Python
+```python
 with open(fileLocation, 'rb') as file:
 	while True:
 		chunk = file.read(fileHash.block_size)
@@ -634,13 +634,13 @@ with open(fileLocation, 'rb') as file:
 return fileHash.hexdigest()
 ``` 
 We can get the MAC address of the current machine by importing the `getnode` function from the `uuid` library. However, this gives us the address as a decimal number instead of the usual "hex" format that MAC addresses are usually written in. After turning it into such a hex number with the `hex` function, we can then insert a colon after every two characters to finally give the MAC address its usual format. 
-```Python
+```python
 def getMacAddress() -> str:
 	mac = str(hex(getnode()))[2:]
 	return ":".join([mac[i*2:i*2+2] for i in range(6)])
 ```
 The time is given to us by the `time` function in the library going by the same name. The current OS can be found using the `platform` function, which also shares its name with the library it is from.
-```Python
+```python
 str(time())
 platform()
 ```
@@ -653,12 +653,12 @@ In the following example, we will see a call to a function ` foo`, with a string
 This step requires an algorithm to detect all strings in a line, save their contents for later, and finally replace them with a placeholder so they can be reinserted in the final level. All escaped quote characters (`\"`) must be replaced by a placeholder so that the compiler does not accidentally confuse them with a proper quote. As a quick reminder: escaped quotes are an actual part of the strings contents rather than a signal to stop the string. An example of this is the following string: `"Then I said: \ "Hello, Bob!\"  "`. The string-detection algorithm works independently of trailing or leading characters, meaning that the backslash would be disregarded and the escaped quote be reintroduced as a "live" one, terminating a string. By replacing escaped quotes with other characters, they can't be confused with a proper quote but can still be reinserted later. It must also be ensured that all strings are properly terminated so that no string is ever started and not ended.
 
 As a very first step, all instances of the character sequence `\" ` must be replaced by the placeholder `&QUOTE`. Because escaped quotes are temporarily exchanged with this replacement, the compiler must only deal with "proper" quotes, which serve to open or close a string. When &QUOTE is met by the interpreter, real quotes can be reinserted and used normally when they no longer affect the compiler. In the compiler, this replacement process is done by the following line:
-```Python
+```python
 line = line.replace("\\\"", "&QUOTE")
 ``` 
 
 The algorithm will then go over every character in the line and save the index of all quotes in a list. Every string must start and end with a quote, meaning that for each string in a line, there must be two quotes. This also means that every line must have an even amount of quotes. We can, therefore, run a check to see whether there is an even amount of quotes in the line. An odd amount would signify that a string was merely started but not ended, in which case an error would need to be thrown: 
-```Python
+```python
 indexList = []
     [indexList.append(i) for i, letter in enumerate(line) if letter == '"']
     if len(indexList) % 2 != 0:
@@ -666,7 +666,7 @@ indexList = []
 ```
 
 Finally, the algorithm keeps a counter, which is incremented for every string found. It then replaces the discovered string with a reference using the format" `str#`", whereby the `#` character is replaced with the counter. Each time a string is replaced, the counter is incremented by one, making sure that each string has its own unique identifier. The string is then stored in a dictionary as a value, with its key being the identifier we just created. 
-```Python
+```python
 for i in range(len(indexList)//2):
         string = line[indexList[i*2]:indexList[i*2+1]+1][1:-1]
         identifier = "str"+str(stringCounter)
@@ -684,7 +684,7 @@ When a condition of an `if` block is not met, we want to jump past all the code 
 As a first step, we can run some basic checks to make sure that no grammar rules were broken by the programmer now that all strings have been removed. For example, there cannot be anything after an opening curly brace or before a closing brace. We will then have to detect curly braces at the beginning and at the end of every new line. We then need to create a new algorithm that iterates over every line and connects the corresponding opening and closing braces with the unique ID appended to them. The algorithm will also store the lines that control flow constructions start and end at. This info consists of their starting and ending lines and what control flow statements start on both of those (as `else` starts on the same line as `if` ends).
 
 Once again, we iterate over every line and make sure that the indexes of all opening and closing curly braces are at the start and end of the line, respectively. If this is ever not the case, we must throw an error. After all, there will never be a case when an opening bracket is not at the end of a line like so: `print({, "hello")`. This is the code responsible for these checks:
-```Python
+```python
 if line.index("{") != len(line)-1:
                 error(6, [index])
 // ...
@@ -694,14 +694,14 @@ if line.index("}") != 0:
 However, trailing or leading white spaces could cause this check to error, as a space character might now be at the start of an indented line, so the line has to be trimmed first. In programming, "trimming" typically refers to removing all spaces at the start or end of a string. In this example, there is a space character after the opening brace (note that the single quotes are used to illustrate the beginning and end of the line):
 `'while true { '`
 The compiler would first detect that the line included an opening brace and would subsequently check whether or not it was at the end of the line. This check, however, would fail, as the last character would be a space instead of the opening brace. By removing all leading and trailing white spaces, the last character would be the opening brace again, and the line would pass all checks:
-```Python
+```python
 def trimLines(lines):
     return [line.strip() for line in lines]
 ```
 
 
 A separate check ensures that every opening curly brace has a matching closing brace. This can be done by creating a counter, which we will call `curlyCounter`. Every time a line contains an opening brace, the counter is subsequently increased by one. If a closing brace is found instead, it is decreased by one instead. Every time the counter goes into the negative, we know that there is one closing brace too much. We can also store the line at which the counter increased to one last. If, at the end of all lines, the counter is greater than zero, that line had an opening brace that was not closed. Here is the code responsible for this:
-```Python
+```python
 for index, line in enumerate(lines):
 	index += 1
 	if "{"in line:
@@ -752,13 +752,13 @@ if x < 20 {1
 ```
 
 The algorithm pertaining to this works as follows: first, we create three variables: `bracesInfo`, `activeList` and `maxIdentifier`:
-```Python
+```python
 bracesInfo = {}
 activeList = []
 maxIdentifier = 0
 ```
 While iterating through all lines, the algorithm checks whether there are any opening or closing curly braces in the current line: 
-```Python
+```python
 for index, line in enumerate(lines):
         if line.startswith("}"):
             // ...
@@ -766,16 +766,16 @@ for index, line in enumerate(lines):
 	        // ...
 ```
 If there are, we append the current integer stored in `maxIdentifier` (which starts at zero) to the brace:
-```Python
+```python
 line.replace(braceType, braceType+str(id)+" ")
 ```
 The algorithm then also appends `maxIdentifier` to `activeList` and increments it by one.
-```Python
+```python
 activeList.append(maxIdentifier)
 maxIdentifier += 1
 ```
 If the line contains a closing brace, we both remove the last value of `activeList` from it and instead add it to the end of the brace. 
-```Python
+```python
 uniqueID = activeList.pop()
 ```
 This system ensures that no ID is ever duplicated thanks to `maxIdentifier`, as it is used as an ID and is always subsequently incremented. This means that each new ID will always be one higher than the last. The system also makes sure that all opening and closing braces are matched correctly, as the last value `activeList` contains will always match the ID of the last open brace. Here is a quick representation of the above example, with every line also showing both `maxIdentifier` and `activeList`:
@@ -811,14 +811,14 @@ In a program of hundreds of lines, it may prove to be difficult to find a simple
 Currently, we may simply read every line in order and deduce its line number that way. The first line will be line number one in the code file, the second line will be number two, and so on. However, in future levels, we will get rid of empty lines and reorder function calls. The order in which each line appears will, at some point, no longer indicate its line number. It is, therefore, important to save the line number now while the code of the programmer is unchanged and each line is at the same position as it is in the programmer's code file. 
 
 A new dictionary must be created which will tie every line together with its number. We will have the line number be the key and the line itself be the value. However, we do not simply store the line as a string. Instead, we store the line within a list, as this will be important later. We then store this list in the dictionary. If an `add` and a `sub` call were the only lines in a file, the dictionary could look something like this:
-```Python
+```python
 {
 	"1": ["add(1, 2)"],
 	"2": ["sub(2, 1)"]
 }
 ```
 It is important to note that looking up items in a list is faster than in a dictionary, as the latter uses hashing. One might, therefore, propose to store the lines in a list instead, as the first line stored in the list could be taken as the first line in the code file. Here is what the above example would look like using lists:
-```Python
+```python
 [
 	["add(1, 2)"],
 	["sub(2, 1)"]
@@ -827,7 +827,7 @@ It is important to note that looking up items in a list is faster than in a dict
 Regardless of the loss of speed, using a dictionary rather than a list works better, as comments and empty lines will be removed in future levels. Additionally, functions will be moved to their own dictionaries in the next step. In a list, after all the empty lines are removed, the index of all following lines is made smaller to fit the now empty gap. If the first line of a script was empty and thus removed in the next step, the second line of the script would take its place and would erroneously become line number one. If we then wanted to report errors in the script, we would falsely report the second line to be the first one in the script based on its location in the list. In order to make sure that each line will always be saved under its correct line number, we will use a dictionary. 
 
 Here is an example in which empty lines are removed in a dictionary:
-```Python
+```python
 {
 	"1": ["x = 10"],
 	"2": [""],
@@ -855,7 +855,7 @@ As can be seen, the line numbers do not shift as they are manually defined by th
 If an error would now occur on line number three, the interpreter would mistakenly report line number two as the culprit. In the original script, line number two is empty, leading to the programmer attempting to fix an error in the wrong line.
 
 Only one new function must be created. In this function, we define an empty dictionary. We then iterate over every line, saving both its contents and its index in separate variables. The index of the line is currently its line number in the code file as well. After turning the index into a string (as dictionaries can't use integers as keys), we use it as a key in the `lines` dictionary and assign an empty list to it. Finally, we append the line to this list before repeating this process with all other lines. These operations are quite frequently done in Python, so "list comprehension" was added to Python as a feature. This allows for the entire functions contents to be written in one line at the cost of readability:
-```Python
+```python
 def turnLinesToDict(linesList):
     return {str(index): [line] for index, line in enumerate(linesList)}
 ```
@@ -864,7 +864,7 @@ def turnLinesToDict(linesList):
 
 ## Strip out functions and empty lines and remove comments (Level 6)
 Because comments are meant to be ignored by the compiler and interpreter, this level will remove all comments from each line to avoid any potential problems. Additionally, all empty lines will be removed as they carry no useful information. Lastly, function definitions must be removed from the main instructions and saved separately. These include instructions, but they should only be run when the function is called. In this context, instructions are run one after another. Instructions contained within function definitions must, therefore, be separated from the rest of the script. If they were not, the interpreter would execute each instruction, including those within a function definition. This can be done by inserting a call to the function "`__exit__`" in between the script and function definition instructions, which will terminate the program before the latter can be reached. Here is an example of this:
-```Python
+```python
 0, 1, put, "Hello!"
 1, 1, __exit__
 2, 4, put, "This is a function!"
@@ -876,7 +876,7 @@ We must go over every line and read through the contained line. If it contains t
 
 
 Most levels begin by iterating over all lines, and this one is no exception. However, since we are now working with a dictionary, we must also get the key along with every line (the key being the line number). We can then scan the line within the list for the "`//`" character sequence, indicating a comment. If one is found, it itself and everything following it is removed:
-```Python
+```python
 if "//" in line:
 	line = line[:line.index("//")].strip()
 ```
@@ -884,7 +884,7 @@ The line is then replaced with this shortened version of itself. *Whitespaces* a
 `var = 1 + var // This adds one to var`
 
 Empty lines contain no useful information, which would have to be turned into instructions. Empty lines must thus either be removed or ignored by the compiler, as there is nothing of value to be extracted from them. The compiler uses the first solution and strips out any empty lines from the dictionary. This approach has the advantage of creating smaller instruction files and leaving out unnecessary empty instructions, which creates added complexity and, thus, more room for errors. Therefore, we now check whether the line contains anything. If it doesn't, we remove the empty line from the dictionary using its key. Note that this is not possible during iteration, as Python does not allow the deletion of keys while iterating through a dictionary. Instead, we will have to store the keys of empty lines and remove them afterward when not iterating through the dictionary. This is the code responsible for this action:
-```Python
+```python
 for index, lineList in lines.items():
 	line = lineList[0]
 	[...]
@@ -897,7 +897,7 @@ for index in emptyIndexes:    
 
 
 As for function definitions, we will create a new function called `seperateFunctions`, which takes in all lines and the `bracesInfo` dictionary from level 4 as arguments. As a quick reminder: `bracesInfo` contains data on what lines contain braces and what control flow operator they are tied to. We will go over every entry in `bracesInfo` and check whether a set of braces belongs to a function definition. If it does, we can retrieve the lines of the starting and ending braces:
-```Python
+```python
 for info in bracesInfo.values():
 	[...]
 	if info["ctrlFlowStatement"] != "func":
@@ -906,7 +906,7 @@ for info in bracesInfo.values():
 ```
 
 We can then iterate over all lines between them, saving them to a new dictionary just for functions and finally adding it to a `funcs` list, which will store the dictionary of the lines of all function definitions. As a last step, we remove all the lines we just copied from the original `lines` dictionary:
-```Python
+```python
 for op in range(startOp, endOp+1):
 	currentFunc[str(op)] = lines[str(op)]
 	removeOps.append(str(op))
@@ -924,7 +924,7 @@ When a programmer writes `1 + 2`, in the background, the code is transformed, an
 This level can be seen as one of the most difficult to implement. This is not necessarily because it requires a lot of code but instead, because we have to find an algorithm that works in a lot of very specific edge cases. Additionally, these two levels require a deeper understanding of syntactical analysis. This algorithm will work as follows: first, we need to give it a list of all keywords and operands in order. This is important, for example, due to the order of operations in math. If operators were to be turned into function calls from left to right, `1+2*3` may turn into the following:
 `multiply(add(1, 2), 3)`
 In this list of keywords and operands, multiplication must, therefore, take precedence over addition. Instead, we must go over the line multiple times. During the first check, all exponent symbols are turned into functions first. During the second sweep, multiplication and division are tackled. Finally, addition and subtraction are dealt with in the third and last iteration. Otherwise, we might add before we multiply, which results in errors. However, there are also other orders which must be kept other than those of the mathematical symbols. For example, we must convert all `==` into functions before we convert `if`s as shown in the following example:
-```Python
+```python
 // Code in question:
 if 1 == 1 {
 
@@ -937,7 +937,7 @@ if 1 == 1 {
 2. isEqual(__checkIf__(1), 1) {
 ```
 We would compare the `if` to something else, which would become problematic. There are two possible types of transformations an operator can undergo. Which one is used is dependent on the operator in question. The first case is used to perform an operation on values to the left and right of the operator. In this case, the values are turned into arguments and the operator into a comma to separate the two. The function is then inserted before the arguments, and they are wrapped with brackets. This typically occurs when two values are compared or combined together in some way. Possible examples of this are the following, with x and y being the values to the left and right respectively:
-```Python
+```python
 x + y -> add(x, y)
 x * y -> mul(x, y)
 x == y -> isEqual(x, y)
@@ -945,12 +945,12 @@ x and y -> __bothTrue__(x, y)
 x in y -> __eachIn__(x, y)
 ```
 In the second case, only the value to the right of the operator is used as an argument. This case, on the other hand, applies when only one value should be worked with, which is the case with control flow operators or operations like `not`. Possible examples of operations resulting in these transformations are as follows:
-```Python
+```python
 if x -> __checkIf__(x)
 while x -> __doWhile__(x)
 ```
 There is one notable exception to this rule:
-```Python
+```python
 return 1, 2                   -> __funcReturn__(1, 2)
 ```
 Return works similarly to the two examples given earlier, as the only arguments passed are values to the right of the keyword. However, this time, not only one value is passed, but every value following the keyword. The values are already separated by commas by the programmer, so the keyword must only be turned into a function call with an opening bracket. Additionally, a closing bracket is inserted at the end of the line, as everything following the keyword on the same line must be passed as an argument. As a last preparation step, we must specify what function we should turn every operation into. In the previous examples, we saw that `+` becomes `add` and `if` becomes `__checkIf__`. Overall, the system must take the following things into account:
@@ -973,17 +973,17 @@ This leads to:
 `15`
 `
 The next challenge to overcome will be the bracket placement. Consider the following examples:
-```Python
+```python
 1 + 2             -> add( 1, 2 )
 (1 + 2) * 2       -> mul( (add(1, 2)), 2 )
 add(1, 2) * 2     -> mul( add(1, 2), 2 )
 ```
 In each case, the compiler must determine where to place the brackets so that all arguments are correctly included. This may be simple when the arguments are simply two stand-alone values but quickly becomes quite complex when one or both arguments are either enclosed in brackets or are function calls. The brackets can no longer simply surround the first value it finds to the left and right of the operation but must also enclose any brackets surrounding it. If this was not the case, something like this might occur:
-```Python
+```python
 (1 + 2) * 3 -> (1 + mul( 2), 3 )
 ```
 In the demonstration above, the multiplication symbol places the opening bracket behind the first value it finds, which is `2`. This should not happen. Instead, the compiler should notice that the `2` is within a set of brackets. It should then go over more values to the right until the bracket is closed. In this case, this would be behind `(1`. This is what the correct placement should look like: 
-```Python
+```python
 (1 + 2) * 3 -> mul( (1 + 2), 3 )
 ```
 Therefore, the systems that detect where to place the brackets to the left and right of the operation must have some added checks in place to ensure that function calls and brackets are included properly.
@@ -1034,16 +1034,16 @@ __checkIfElse__( } , true ) {
 
 
 We can implement this by first looping over every line in the lines dictionary. We then insert spaces around every operator. 
-```Python
+```python
 for i, line in lines.items():
     line = " " +line[0] + " "
 ```
 Now, we go over every set of operators in the list from left to right. Specifically, they are sets of operators, because, as previously described, the "`+`" operation should not take precedence over the "`-`" one just because it is saved earlier in the list. We must save these special operators that are of equal significance in a list together. Even operators that are not special (like the `=` sign) must be saved in a list like so:
-```Python
+```python
 oop = ["*/", "+-", ":", ["=="], ["!="], "=", [...], ["for"], ["return"]]
 ```
 We can then iterate over the current operators list and compare their indexes in the list. Whichever operator is first in the list is turned into a function call first in order to preserve the order of operations:
-```Python
+```python
 def getFirstOp(line, ops):
     lowestIndex = -1
     lowestOp = ""
@@ -1083,7 +1083,7 @@ Now, the other characters are looked at once again, from left to right. The next
 `9`
 
 We repeat this process for every set of operators until none of the contained elements appear in the list, in which case we continue on to the next set. If we find the first operator, we get its index in the line and store it. First, we remove it from the line and replace it with a comma. We only replace it with a comma in some instances, though, as keywords like `not` do not need to be replaced. We would not want `not false` to turn into `__makeNot__(,false)`:
-```Python
+```python
 def removeOp(i, line, op):
 	# We replace the operator with a comma only
 	# if it is required
@@ -1114,7 +1114,7 @@ a * ( b + c ) _
 ```
 
 We can do this by using a (to us) familiar technique: we create a new counter. Every time we find an opening bracket to the right, we increment the counter by one. If we find a closing bracket, we decrease it. Upon hitting a character that is not a whitespace, we can set `hitChar` to `true`. Only when the counter is at zero, we have found a whitespace, and `hitChar` is true may we place our closing bracket at that location:
-```Python
+```python
 def findRightWhiteSpace(i, line, skipAmount=0):
 	hitChar = False
     skippedAmount = 0
@@ -1151,13 +1151,13 @@ a + ( b * c + ( d - e ) ) _
 ```
 
 This entire same algorithm also applies to `findLeftWhiteSpace`, which effectively does the same. However, there are some small differences. For example, we now look from right to left, starting at the operator, as we want to place the opening bracket. Additionally, we not only insert the opening bracket but also the correct function name for the operation. We can find it by creating a new dictionary, in which each operation has the function it should turn into specified:
-```Python
+```python
 opFuncs = {">": "__greater__", "<": "__lesser__", "<=": "__lesserOrEqual__", ">=": "__greaterOrEqual__", [...], "or": "__bothOr__"}
 ```
 We can use this dictionary and insert the correct function's name and an opening bracket at the first whitespace outside of any brackets. 
 
 In the case of the control flow keywords like `if` or keywords like `not`, we do not need to use this algorithm. Instead, we simply insert the function name and the opening bracket at the same location where the keyword was before to create something like `__doIf__(true)` or `__makeNot__(true)` (in the case of `not true`). There is a list of operands which require this special modus operandi. When `findLeftWhiteSpace` is called, it checks whether or not the operator is stored in this list:
-```Python
+```python
 noLeftOps = ["if", "elif", "for", "return", "else", "while", "for", "not"]
 
 def findLeftWhiteSpace(i, line, funcToBeInserted, op):
@@ -1198,7 +1198,7 @@ This creates a new problem. When `=` is replaced with ` = `, this will also caus
 - `/=` becomes ` /  = `
 - `*=` becomes ` *  = `
 NoBash solves this problem using the `removeSpaces` function. The compiler assumes that, when it finds two equals signs separated by two spaces, the user initially wrote `==`. It then deletes the two spaces and, therefore, puts the operator back together:
-```Python
+```python
 def removeSpaces(line):
     toBeRejoined = ["=  =", "! =", "el if", "+  =", "-  =", "/  =", "*  ="]
     for item in toBeRejoined:
@@ -1208,7 +1208,7 @@ def removeSpaces(line):
 
 
 `for` loops are also a special case, as we must first replace the `in` keyword with a comma (to separate the iterator variable from the list). As an example, `for fruit in fruits` must become `__doFor__(fruit, fruits)` rather than `__doFor(fruit in fruits)` as the latter is not a proper function call. Then, we must place the closing bracket around two arguments rather than one (namely, the ones referenced before). We can solve this by creating a `skipAmount` variable and setting it equal to one if the current operator is a `for` keyword. We then skip over as many correct positions for a closing bracket as high as `skipAmount` is:
-```Python
+```python
 def findRightWhiteSpace(i, line, skipAmount=0):
     [...]
     for newI, char in enumerate(line):
@@ -1236,7 +1236,7 @@ Additionally, we also need to implement special exceptions for `if`, `elif`, `el
 __checkIf__(ret0, {0)
 ```
 For now, the second argument will simply be the opening bracket following the `if` clause along with its unique ID. In level 11, we will replace the opening bracket with a reference to the instruction that the closing bracket is in. To add the brace as a second argument, you first have to insert a comma in front of the opening curly brace to separate the two arguments. This can easily be done by replacing all occurrences of the string "`{`" with "`, {`", creating the wanted separator:
-```Python
+```python
 if firstOp in ["if", "elif", "else", "while", "for", "return"]:
 				line += ")"
                 if firstOp != "else":
@@ -1299,7 +1299,7 @@ One can imagine `jumpBackToFor` to simply jump to the instruction number passed 
 As a first step, we must figure out both in which lines we must replace closing braces and with what function call. The former bit of information is outright stored in the `bracesInfo` dictionary we created in level 5, along with the data we need to figure out the latter question. So, we will first look at the `bracesInfo` dictionary and get info on all closing curly braces, like the lines they appear on and what control flow statement each one is tied to. Now that we know what line they are on, we can jump to them. "*cbrf*" is a term coined by NoBash and stands for the "closing brace return function". In other words, it is the function unique to each control flow operator we want to replace the closing bracket with. For example, the *cbrf* for a `for` is `__jumpBackFor__()`. Using a dictionary containing the relevant *cbrf* for each control flow statement, we can figure out what function we must put at the end of each control flow construction. This is possible because the `bracesInfo` dictionary tells us what control flow construction is terminated by a closing brace on a specific line. We will also pass the closing bracket along with its unique ID as an argument to the *cbrf*, which the function will be able to use in a later level to determine which instruction number it has to jump back to.
 
 We first iterate over every value in the `bracesInfo` dictionary. Each of these values will, once again, be a further dictionary. The key bits of information each one contains will be "`endOp`" and "`ctrlFlowStatement`". 
-```Python
+```python
 for id, info in bracesInfo.items():
         endOp, ctrlFlowStatement = info["endOp"], info["ctrlFlowStatement"]
 ```
@@ -1319,14 +1319,14 @@ The former will tell us what line the closing bracket is on, whereas the latter 
 ```
 
 In order to apply this modification to all brackets in a script, we must go over every entry in the `bracesInfo` dictionary:
-```Python
+```python
 # id will contain the brackets ID and info will
 # contain what line the closing bracket is on
 # and what control flow statement it is connected to
 for id, info in bracesInfo.items():
 ```
 In this `for` loop, we can find the line the bracket is located on under the `endOp` key in the entry. We can then take the line number as given to us by `endOp` to jump to the line containing the closing brace like so:
-```Python
+```python
 endOp = info["endOp"]
 ctrlFlowStatement = info["ctrlFlowStatement"]
 # We check whether or not the line actually exists
@@ -1335,11 +1335,11 @@ if str(endOp) in lines.keys():
 	lines[str(endOp)][0]
 ```
 We already have the ID of the bracket saved in a variable, so we can remove the bracket from the end of the line. We will reinsert it in the correct position later. Here is the code responsible for removing the brace:
-```Python
+```python
 lines[str(endOp)][0] = lines[str(endOp)][0].replace("}"+str(id), "")
 ```
 This may look very confusing at first, so let us clean this up a bit:
-```Python
+```python
 # First, we get the line number that contains the brace
 lineIndex = str(endOp)
 
@@ -1370,12 +1370,12 @@ currentLine = currentLine.replace(braceWithID, "")
 lines[str(endOp)][0] = currentLine
 ```
 At this point, we have the line without the brace. If the line is empty without it, we can delete it, as we will replace it entirely in the next step. If the line contains an `elif` or `else` statement, it will not be empty as `}0 else {1` will become ` else {1`. In this case, we need to keep the line so as not to delete the `elif` or `else`. An `if` check can determine whether the line is empty or not, and we can delete it accordingly:
-```Python
+```python
 if not lines[str(endOp)][0].strip():
 	del lines[str(endOp)][0]
 ```
 Because the `lines` dictionary stores each line within a list rather than as a string, we can append the *cbrf* to the end of the list. This may sound confusing at first, as we are effectively storing two "lines" under one line number as demonstrated in the following example:
-```Python
+```python
 # Here is an example program with line numbers to the left:
 1. if 1 == 1 {
 2. } else {
@@ -1399,7 +1399,7 @@ While this may not make immediate sense, it comes in very handy. Even though it 
 - The *cbrf* acts as a safe instruction the interpreter can jump to when the `if` condition is not met
 - It also contains an `else`, which is important to the programs logic
 We have, therefore, merely separated this one line into two. However, we must still store them under the same line number, as that is where they both originated from. It is important that we do this since an instruction can only hold one function call at a time. Without splitting up the one line into two, it would look something like this:
-```Python
+```python
 # Note that the else has been replaced with its function in level 7.
 # This fact has been left out up until now to make
 # the examples more clear
@@ -1408,24 +1408,24 @@ __cbrfIf__(}0) __doElse__({1)
 The code above does not work and would crash the compiler. This is why it is imperative that we split up the two function calls onto separate lines, even if we do so using the same line number. Let us now create the code to append the *cbrf* to the line's list. 
 
 In order to do so, we must first create a way to determine which *cbrf* should be inserted. A `for` loop must be closed using a *cbrf* specifically designed to jump back to the beginning of the loop. The *cbrf* at the end of an `if` condition acts completely differently. Therefore, every control flow statement must have its own *cbrf*. We have already saved what control flow statement was ended by the brace in the `ctrlFlowStatement` variable. A simple solution would, therefore, be creating a dictionary. The control flow statement acts as a key, and the value is the corresponding *cbrf*:
-```Python
+```python
 closingBracketReturnFunctions = {"for":"__jumpBackFor__(}", "if": "__cbrfIf__(}", [...], "while": "__jumpBackWhile__(}"}
 ```
 Using this dictionary, we can retrieve the *cbrf* to add to the current line using the following code:
-```Python
+```python
 closingBracketReturnFunctions[ctrlFlowStatement]
 ```
 It should be pointed out that the dictionary does not contain the full function call for the *cbrf*. Instead, it has an opening bracket and brace after the function name. Crucially, it is still missing the brace's ID and the closing bracket to finish the function call. This can be added like so:
-```Python
+```python
 # id contains the ID of the brace
 closingBracketReturnFunctions[ctrlFlowStatement]+str(id)+")"
 ```
 We can then append this to the list responsible for containing the line at the current line number:
-```Python
+```python
 lines[str(endOp)].append( closingBracketReturnFunctions[ctrlFlowStatement]+str(id)+")")
 ```
 If the line consisted only of the closing brace, because we deleted the line earlier, the closing brace has been replaced with a *cbrf*. If, instead, the line of code also included an `else` or `elif`, the list containing the code has been expanded to also hold the *cbrf*. There is one exception to this: functions. Functions do not need to know where they started, so passing the brackets ID to it is redundant. The dictionary containing *cbrf*s, therefore, makes an exception for functions. The *cbrf* for the function is stored as a complete call (`_funcReturn__()`) rather than a partial one with a brace (`__jumpBackFor__({`). We, therefore, also do not have to add the brackets ID and a closing bracket to the end of the *cbrf*:
-```Python
+```python
 # If the control flow statement is not a function:
 # get the cbrf and add the ID and closing bracket
 if ctrlFlowStatement != "func":
@@ -1462,7 +1462,7 @@ The first line of each function will always be a function definition. The syntax
   
 
 By iterating over every function within the `funcs` list and retrieving the first line of each, we will already have every function definition of the script. 
-```Python
+```python
 for index, func in enumerate(funcs):
         for lineNumber, line in func.items():
             line = line[0]
@@ -1486,7 +1486,7 @@ func functionName() {
 functionName
 ```
 and here is the code that does it:
-```Python
+```python
 name = ""
 for char in line[5:]:
         if char in string.ascii_letters + " ":
@@ -1506,7 +1506,7 @@ func hello(x, y) {
 // to encapsulate parameters 
 ```
 Here is the code responsible for making this check:
-```Python
+```python
 # If this condition is met...
 if line.count(")") == line.count("(") == 1:
     return # Return out of the check function
@@ -1516,7 +1516,7 @@ error(15, [lineNumber])
 ```
 
 Once the syntax check is passed, we can attempt to read out all arguments. Using the function `getParameters`, we can do this by reading the string between the two brackets and calling the `split` method on it, passing a comma as a parameter. As a refresher: `split` takes in a string and a "delimiter". It will return a list that contains everything to the left and right of each delimiter as an item. Here is an example of this:
-```Python
+```python
 numbers = "1,2,3".split(",")
 print(numbers)
 # This will print:
@@ -1531,7 +1531,7 @@ print(arguments)
 ```
 
 This will give us a list with all parameters as new elements:
-```Python
+```python
 line = line[line.index("(")+1:line.index(")")]
 return [param.strip() for param in line.split(",")]
 ```
@@ -1543,7 +1543,7 @@ func hello(name) {
 }
 ```
 
-```Python
+```python
 # This dictionary stores function instructions
 # with the function name as the key. 
 {'hello': {'1': ['put(name)']}
@@ -1557,17 +1557,17 @@ func hello(name) {
 Instructions contain one function call each. However, for convenience, programmers typically use multiple functions in one line. Additionally, things like setting variables were turned into function calls. For example, in this line, a programmer adds together two numbers and outputs the sum: `put(add(1, 2))`. In another case, we might see the sum being stored in a variable `x`, like so: `x = 1 + 2`. However, as mathematical operations were previously turned into function calls, this line would now look as follows: `__setVar__(x, add(1, 2))`. A call to a function passed as an argument is called "*nested function call*".
 
 The compiler needs to turn lines into instructions. Therefore, a line that contains more than one function call poses an issue, as an instruction may only ever contain one function call. The compiler must, therefore, split up such lines and turn each function call into its own instruction. The latter example, once split up so that each function call is on a separate line, would look something like this: 
-```Python
+```python
 1. add(1, 2)
 2. __setVar__(x, )
 ```
 When functions are used as arguments for other functions, the value which it returns is used in its place. When the function is extracted, the value it returns is no longer supplied to the second function. This can be seen in the second line of the above example since a second argument is missing. In line two, there is now a gap where the returned value of the first function would have been. Therefore, there must be some sort of placeholder that tells the compiler to use the returned value from the previous function. NoBash uses the „ret“ system to accomplish this. When the first instruction is run, it will return `3`. This value will then be stored and can later be accessed using the instruction number where it was returned from. For example, `3` would be saved as the value returned by instruction 1. Additionally, the instruction number 2 would look like this: `setVar(x, ret1)`. In this context, `ret1` is a reference to the returned value of the first instruction. These "references" are called "return value variables" in NoBash, or *RVV* for short. Similarly, `ret2` does the same for the second instruction, and so on. When the interpreter finds such a `ret` value, it will replace it with the value returned by the instruction at the specified index. The example, therefore, would look like this:
-```Python
+```python
 1. add(1, 2)
 2. setVar(x, ret1)
 ```
 It is important to note that this also works for several functions passed as parameters. A simpler, albeit flawed, solution would be inserting the returned value of the instruction above into any gaps. This approach would not work when there are two or more arguments passed, with both being function calls, such as here: `sub(add(1, 2), mul(1, 1))`. Using the `ret` system, this line can easily be turned into instructions as follows:
-```Python
+```python
 1. add(1, 2)
 2. mul(1, 1)
 3. sub(ret1, ret2)
@@ -1575,7 +1575,7 @@ It is important to note that this also works for several functions passed as par
 
 
 This level will be the hardest to implement overall. We will have to create an algorithm that recursively finds all function calls passed as an argument. Here is an example of this:
-```Python
+```python
 # The original line:
 lines = {
 	"1": [
@@ -1587,7 +1587,7 @@ lines = {
 # sub(1, 2)
 ```
 Once one has been found, we must append it to the end of the list, which contains the line it is in like so:
-```Python
+```python
 # The argument is appended as a new line:
 lines = {
 	"1": [
@@ -1598,7 +1598,7 @@ lines = {
 
 ```
 We can then replace it with its RVV:
-```Python
+```python
 # The RVV is inserted into the gap
 # The "instruction numbers" are noted to the right
 # At the end, the list will be reversed so that 
@@ -1611,7 +1611,7 @@ lines = {
 }
 ```
 We must then repeat this recursively, for there may be more function calls in the arguments of the function we have just extracted. When something happens "recursively", the same action which produced the first result is applied to this same product. In this case, this would mean extracting any nested function calls from a function call that was just extracted:
-```Python
+```python
 # This is the line initially
 add(sub(mul(2, 3), 4), 7) 
 
@@ -1655,7 +1655,7 @@ Additionally, we can't know the instruction number of a function while it is bei
 
 
 First, we must create a function `runSplit` which will repeat the entire process for both every line in the main script and all the ones contained in functions:
-```Python
+```python
 def splitFuncCalls(lines, funcs):
     [...]
     # Split up all lines in the main script
@@ -1670,7 +1670,7 @@ def splitFuncCalls(lines, funcs):
 ```
 
 As can be seen in the above code snippet, the lines in both all functions and the main script are passed to a `runSplit` function. It is responsible for going through every line given to it and calling `splitFunctionCalls` and `insertProperRetVals` on them. The former function takes a full line of code in as an argument and splits it up into instructions. These will then be returned in a list. These instructions still include the "placeholder" RVVs rather than the proper ones. `insertProperRetVals` therefore comes into play now, changing all of the temporary RVVs into proper RVVs.
-```Python
+```python
 def runSplit(lineDict, retCounter):
     newDict = {}
     for index, lineList in lineDict.items():
@@ -1680,7 +1680,7 @@ def runSplit(lineDict, retCounter):
 ```
 
 Let us look at `splitFunctionCalls` more closely. Let us first focus on it's start as it is quite a long function:
-```Python
+```python
 def splitFunctionCalls(lineList, firstCall=True):
     [...]
     for lineIndex, line in enumerate(lineList):
@@ -1689,7 +1689,7 @@ def splitFunctionCalls(lineList, firstCall=True):
     [...]
 ```
 `splitFunctionCalls` iterates over every "instruction" in the current line, though there will typically only be one instruction initially. In every instruction, it will first make sure that all brackets are properly placed. This will stop erroneous bracket placement like: `put)"hello"(` or `put("hello"`. These checks are done by the `checkBracketValidity` function. Its algorithm has been used previously in NoBash, as the function relies on counting the brackets. If there is ever a closing bracket more than there are opening ones, an error will be raised. If, on the other hand, an opening brace was not closed, it will also inform the programmer of this and exit:
-```Python
+```python
 # lineIndex is the line number
 def checkBracketValidity(line, lineIndex):
     bracketCounter = 0
@@ -1713,7 +1713,7 @@ def checkBracketValidity(line, lineIndex):
 ```
 
 If these checks are passed and the compiler is still running, `splitFunctionCalls` will then need the outermost set of brackets. It will get the location of these by calling `getOutermostBrackets`:
-```Python
+```python
 def getOutermostBrackets(line):
     if "(" not in line or ")" not in line:
         return -1, -1
@@ -1749,7 +1749,7 @@ put(add(1, 1), sub(2, 1))
 // reached zero before that of the sub function
 ```
 Here is the code responsible for this logic:
-```Python
+```python
 def getOutermostBrackets(line):
 	# If there are no brackets, there is nothing
 	# to index
@@ -1786,7 +1786,7 @@ Once the brackets have been found, NoBash will attempt to detect the name of the
 4) If the current character is a letter or an underscore, this must be a part of the function name. For every letter found, increase a counter by one. This counter indicates how long the function name is
 5) If the current character is not a letter or an underscore (like a space), we are past the function name and can stop going through all characters
 6) We can get the index of where the function name starts by subtracting the length of the name from the index of the opening bracket. If the bracket is at index seven and the name immediately behind it is three characters long, we can calculate that it must start at index 4.
-```Python
+```python
 def detectFunctionCall(line, index):
     fullLine = line
     line = line[:index] # Step 1
@@ -1820,7 +1820,7 @@ a  *  (  b  +  c  )
 a  *  __noopReturn__( b  +  c  )
 ```
 The code for this is also located in the `detectFunctionCall` function. This is how it works:
-```Python
+```python
 def detectFunctionCall(line, index):
     [...]
     if not lastFunctionChars > 0:
@@ -1831,7 +1831,7 @@ def detectFunctionCall(line, index):
 If the length of the function name is zero, it does not exist. The brackets, therefore, are not a part of a function call. If this is the case, we pass the line and index of the opening brace to `insertFunctionCall`. The length of the function name can be determined with `len("__noopReturn__")` because it remains the same. `insertFunctionCall` returns the original line but with the `__noopReturn__` function inserted right before the opening bracket.
 
 As a next step, the algorithm finds all arguments of the function call. It must simply take the string between the opening and closing bracket and split it based on commas. This is all done by the function `getArguments`:
-```Python
+```python
 def getArguments(firstBracket, secondBracket, line):
 	# Args will store all the extracted arguments
     args = []
@@ -1873,7 +1873,7 @@ def getArguments(firstBracket, secondBracket, line):
 ```
 
 One difficulty is needing to differentiate between commas separating arguments in the current function call or in nested function calls. Here is a visualization of this:
-```Python
+```python
 # Here is a nested function call:
 add( sub(1, 2), 3)
 # We want the following list of arguments:
@@ -1926,7 +1926,7 @@ argumentTwo = 3
 // argumentThree = 3 
 ```
 This is all done with the following code that was hidden when we looked at `getArguments` before:
-```Python
+```python
 def getArguments(firstBracket, secondBracket, line):
     args = []
     currentArg = ""
@@ -1956,7 +1956,7 @@ def getArguments(firstBracket, secondBracket, line):
 ```
 
 Back in `splitFunctionCalls`, we can then iterate over every argument of the current function. `splitFunctionCalls`, therefore, currently looks like this:
-```Python
+```python
 def splitFunctionCalls(lineList, firstCall=True):
     [...]
     for lineIndex, line in enumerate(lineList):
@@ -1974,7 +1974,7 @@ def splitFunctionCalls(lineList, firstCall=True):
 	        [...]
 ```
 We are now going through every argument to repeat this same process on it this time, as it could be a nested function call itself. Once again, we look for the first outermost brackets in the argument and the function to be called (or insert `__noopReturn__` if we only find brackets). Note that if we do not find brackets, there are no nested function calls, and we can safely skip over all the next steps. The current argument can remain unchanged:
-```Python
+```python
 def splitFunctionCalls(lineList, firstCall=True):
 	[...]
     for lineIndex, line in enumerate(lineList):
@@ -1995,7 +1995,7 @@ def splitFunctionCalls(lineList, firstCall=True):
 If `getOutermostBrackets` does not find any, it will return the indexes of both brackets as negative one. This can be used to determine whether any brackets were found at all, as the index of both the opening and closing brackets can't be the same in any other case, let alone be negative. If we do find another function call, we must copy the entire argument we just found and append it to the lines list.  
 
 We must now replace the extracted argument with an RVV. However, because the list of instructions will be reversed near the end of this level, we can't currently know whether there are any more nested function calls that would increase the instruction number of the current one. Here is an example of this:
-```Python
+```python
 # This is the line we start with:
 add(sub(mul(1, 2), 3), 4)
 # These instructions are our end goal:
@@ -2030,7 +2030,7 @@ instructions = ["mul(1, 2)", "sub(, 3)", "add(ret0, 4)"]
 ```
 
 Because the instruction numbers are not set in stone, we will make the RVV temporary. We make it the "ret" suffix plus the index of the nested function call in the lines list. Let us apply this to the example above:
-```Python
+```python
 # This time, we do not reverse the order of the 
 # instructions until the end of this level
 instructions = ["add( , 4)", "sub(mul(1, 2), 3)"]
@@ -2049,7 +2049,7 @@ instructions = ["add(ret1, 4)", "sub(ret2, 3)", "mul(1, 2)"]
 ```
 
 In other words, equal to the length of the lines list (as it was appended to the end, making its index always be the length of the list). 
-```Python
+```python
 def splitFunctionCalls(lineList, firstCall=True):
 	for index, arg in enumerate(args):
 		[...]  # We can only get this far if arg contains
@@ -2094,7 +2094,7 @@ add(sub(mul(4, 3), 2), 1)
 ```
 
 Once we are done, and there are no more nested function calls in the current line, we will reverse the lines list to make nested functions be executed before the function that expected their returned value as an argument:
-```Python
+```python
 # This is the line we start with:
 add(sub(mul(1, 2), 3), 4)
 # These instructions are our end goal:
@@ -2118,7 +2118,7 @@ instructions = [
 
 ```
 However, the RVVs we set are still simply placeholders, as can be seen in the example above. Therefore, we must create a new function, `insertProperRetVals,` which turns these placeholders into the real RVVs using the correct instruction numbers. It will search every instruction of a line for a string matching the pattern "`ret`":
-```Python
+```python
 def insertProperRetVals(line, retCounter):
     for indx, segment in enumerate(line):
         newSegment = ""
@@ -2127,7 +2127,7 @@ def insertProperRetVals(line, retCounter):
 ```
 After checking that there is a number immediately following the matched string (to make sure it has not matched a `return` statement, for instance), it will use the following formula to calculate the proper instruction number of the instruction that returns the RVV: 
 1) First, it will determine the index of the instruction in the line now that the line is completed and its length is known:
-```Python
+```python
 len(line) - int(ret[3:])
 ```
    Because the current RVV index is set equal to the index of the instruction in the list before it was reversed, we can find out its current index by subtracting the current RVV index from the current length of the lines list. 
@@ -2169,7 +2169,7 @@ Replacing all brackets with either the string "`cbrs`" or "`obrs`" can be done b
   
 
 The first step will be creating a function `replaceCBRS` which iterates over every line and uses the `replace` method to replace all occurrences of "`{`" with "`obrs`" and "`}`" with "`cbrs`" respectively:
-```Python
+```python
 def replaceCurlyBraces(lines):
 	# Go through every line
     for lineNumber, line in lines.items():
@@ -2181,7 +2181,7 @@ def replaceCurlyBraces(lines):
 ```
 
 The second goal of this level requires us to use the `bracesInfo` dictionary once again. We must iterate over every `key: value` pair stored within it, with these being the corresponding `ID` and `info` about the control flow construct, respectively:
-```Python
+```python
 def getIfChains(bracesInfo):
     ifChains = []
     ends = {}
@@ -2190,7 +2190,7 @@ def getIfChains(bracesInfo):
 	    [...] # We will implement this now
 ```
 We can then check the `info` dictionary to see what kind of keyword it relates to. If it relates to any of the conditional keywords, this could mean that it is part of an if-chain:
-```Python
+```python
 def getIfChains(bracesInfo):
 	[...]
 	conditionals = ["if", "else", "elif"]
@@ -2205,7 +2205,7 @@ def getIfChains(bracesInfo):
 ```
 
 In a dictionary called `ends`, we store the ending line numbers of all of these conditionals along with their respective IDs. We can, therefore, look through `ends`, checking to see if any conditional ended on the same line as this one started:
-```Python
+```python
 def getIfChains(bracesInfo):
     [...]
     # This is the line the conditional started on
@@ -2222,7 +2222,7 @@ def getIfChains(bracesInfo):
 		[...]
 ```
 If we find such a match, we must add or create a new if-chain in the `ifChains` list, where we store them. Each if-chain is composed of a list which will contain the IDs of all cbrs in the chain. The list may look something like this:
-```Python
+```python
 ifChains = [
 	["0", "1", "3"], # This is one if chain
 	["5", "8"]       # Here is another
@@ -2230,7 +2230,7 @@ ifChains = [
 ```
 
 Upon finding a match in the `ends` dictionary, giving us the relevant ID of the conditional ending on the line the current conditional starts on, we can search the `ifChains` list for a chain containing that ID. Finally, we append the current conditional we have identified to be a part of the chain to the `ifChains` list. If the chain does not exist yet, we can create it by adding the ID to an empty if-chain list:
-```Python
+```python
 def getIfChains(bracesInfo):
     [...]
 	if str(startOp) in ends:
@@ -2282,7 +2282,7 @@ This would be split up into two instructions, one which compares the two values 
 When the end of the `while` construction is met and the interpreter wants to jump back to the start, with the current system, it would jump to instruction number one, as this is the line which contains "cbrs". However, this would not work, as the check in instruction number 0 would then never be made. This would essentially create an endless loop, as the check would only be run once when starting the loop, and the result of the check would be used and never re-evaluated in future checks. The system, therefore, must not jump to the instruction containing the brace but to the first instruction of the *line* containing the brace. This ensures that all instructions of the `while` loop are made.
 
 The function responsible for this level will be `gteBracketInstruction`. Inside of it, we first add the functions to the end of the lines. This ensures that when counting instructions, we do not restart the counter when we iterate over a new function. All instructions, whether they originate from a function or not, should be counted in order. We then iterate over all lines in every instruction, followed by every instruction within that line. During all of this, we always save the number of the first instruction of the current line:
-```Python
+```python
 def getBracketInstruction(lines, funcs):
 	# First, we create one list containing both all
 	# lines in the main script and those in the 
@@ -2323,7 +2323,7 @@ def getBracketInstruction(lines, funcs):
 				instructionCounter += 1
 ```
 At this point, we have the first instruction in every line. This means that in the previous example, even though the brace occurs in instruction one, we can trace the first instruction of the line back to the comparison. 
-```Python
+```python
 0, 1, isEqual, x, 1
 1, 1, __doWhile__, ret0, cbrs1
 
@@ -2333,7 +2333,7 @@ At this point, we have the first instruction in every line. This means that in t
 # instruction in the line containing the bracket.
 ```
 To complete this level, we must now actually detect instructions containing braces. We then need to save the first instruction of the line the brace appears on in a dictionary. The interpreter can later use this dictionary to jump to the proper instruction when encountering a brace:
-```Python
+```python
 def getBracketInstruction(lines, funcs):
     [...]
     [...] # For each line:
@@ -2366,17 +2366,17 @@ def getBracketInstruction(lines, funcs):
 At this point, we have finished making all instructions, and the interpreter can now run them. Currently, the instructions are stored in memory (RAM), which, as described earlier, will be erased when the computer is shut down. However, if the same script is run again after the computer is shut down, the compiler would have to re-compute all instructions. Additionally, computers typically don't have a huge amount of RAM, so data should be saved there sparingly. NoBash, therefore, writes the instructions in a file to the computer's storage, which has a lot more space, and data is stored on it persistently even after the computer is shut down. When the interpreter wants to run the instructions, it can read the file containing them, thereby loading the instructions into the valuable RAM space only when they are needed. 
 
 We will first need all of the data we have gathered over the course of nearly all levels. This includes all instructions, if-chains, and info on braces, just to name a few. The way we save the data in the file differs from data to data. For example, instructions need to have their starting instruction and line written at the very beginning like so:
-```Python
+```python
 0, 1, put, "This is an instruction"
 ```
 Info on functions immediately starts with the function name and has the instruction they start on listed after:
-```Python
+```python
 foo, 0   # Foo starts on line 0
 ```
 It is important to mention that all compiled scripts are saved in the same location. Specifically, they are stored in `~/.nobash/compiledScripts/`, whereby `~` stands for the user's home directory (e.g: `/home/alice`). When a NoBash script is run, NoBash first checks whether a compiled instructions file already exists for the given script in that folder. If the compiled files were saved in the same directory as the original script, this would produce a lot of clutter in a folder. The downside of this approach is that only one script of a certain name can stay compiled at once. If `script.nb` was run in one directory, `script.nbc` would be saved in `compiledScripts`. Then, if a different script going by the same name was run in another directory, its compiled file would overwrite that. However, when two scripts are called differently, the compiled files can be stored simultaneously without issue. 
 
 To start this level, we should create a main function, `writeDataToFile`. It will then call each function specialized in saving a certain type of data. `writeDataToFile` is also responsible for initially creating the file all other functions will write to. Here is its code:
-```Python
+```python
 def writeDataToFile(lines, [...], metadata):
     try:
 	    # We first get the location to store the
@@ -2409,7 +2409,7 @@ def writeDataToFile(lines, [...], metadata):
         error(16, scriptName.replace(".nb", ".nbc"))
 ```
 We will not look at how every type of data is written to the file, as the code typically always stays the same with only some minor changes. There is, however, an interesting part of the function responsible for writing instructions we should look at:
-```Python
+```python
 # This function is responsible for inserting
 # strings back in for their replacements ("str#").
 def insertStrings(line, stringDictionary):
@@ -2451,14 +2451,14 @@ The `-i` flag specifies that the following file should be interpreted immediatel
   
 
 This entire level can be done in one function in around five lines. It only takes the file location as an argument and returns the lines the file contains inside a list. First, we have to create a file that calls the other levels. We will call it `interpreter.py`. Inside it, we can try getting the first argument passed:
-```Python
+```python
 try: 
     fileLocation = argv[1]
 except Exception as e:
 	error(218)
 ```
 If no argument was passed, an error is raised. This works in the same manner as it does in the compiler. We can then pass this file location to a `readFile` function we will create now. This will be where we write the bulk of the code required for this level:
-```Python
+```python
 def readFile(fileLocation):
     try:
         with open(fileLocation, "r") as file:
@@ -2467,11 +2467,11 @@ def readFile(fileLocation):
         error(94, [fileLocation])
 ```
 We must wrap the file processing in a try-except block, as multiple things may go wrong while reading the file at the given position. For example, there may not be a file at the passed position, or the interpreter may not have permission to read it. If any of this fails and an exception is thrown, we pass this data on to our error handler, which then communicates the issue to the user. If everything goes according to plan, we can use the built-in "`readlines`" method on the opened file, which gives us all of the file's lines separated as a list:
-```Python
+```python
 file.readlines()
 ```
 We must now only remove any potentially leftover newline characters at the end of each line:
-```Python
+```python
 # We first create a new list. We then go through 
 # every line in the file. If the file ends with
 # a newline character, we remove it. We then add
@@ -2485,11 +2485,11 @@ Once this is done, we may return the list of lines back to `interpreter.py`.
 ## Separate the file into sections (Level 2)
 
 Instruction files do not only include raw instructions but also metadata and function definitions. These different pieces of information are all written down in different ways. For example, a line containing an instruction may look like this:
-```Python
+```python
 4, 3, put, „hello“
 ```
 whereas a line containing a function definition may look like this:
-```Python
+```python
 # Notice how the first two integers are missing
 printResult, 5, 7
 ```
@@ -2498,7 +2498,7 @@ If the interpreter tried to interpret a function definition as it would an instr
 In the instructions file, instructions are already separated into sections. Therefore, we have to read through every line in the file and check whether the current line is a section definition or not. If it is, we can determine what section is being started. All subsequent lines belong to that section. They must, therefore, also be stored in such a way that we can easily find out what kind of data any given line carries.
 
 New sections are declared like this: „`# [section name]`“, whereby „`[section name]`“ is the name of the section. The lines after the declaration belong to it until there is either a new section definition or the end of the file is met. We must only read through every line one by one and use the „`startswith`“ method on the current line:
-```Python
+```python
 def splitSections(rawLines):
     [...]
     # Go through every line
@@ -2512,7 +2512,7 @@ def splitSections(rawLines):
 It must be noted, however, that functions defined within a NoBash script must consist exclusively of letters, as having a function name start with „`#`“ would mean that the line defining the function would look like this: „`#, 12`“, causing the `12` to be interpreted as a function name (as it is a string of characters after the # separated by a space). 
 
 Once we have found a line beginning with a pound symbol, we can then split this line into a list based on spaces. The expected list would look something like this: `[“#“, “[section name]“]`. We can take the second element of this list, which would be the section name, like so:
-```Python
+```python
 def splitSections(rawLines):
     [...]
     section = None
@@ -2523,7 +2523,7 @@ def splitSections(rawLines):
             section = line.split()[1]
 ```
 We can then start reading every line and use the method described previously to detect a section definition and find the section name, which we then store in the variable `section`. In the dictionary storing all sections with their lines, we then use the section name as a key and have the corresponding value be an empty list. We then go through each subsequent line and add it to the list the current section name is pointing to:
-```Python
+```python
 def splitSections(rawLines):
     sections = {}
     section = None
@@ -2543,7 +2543,7 @@ def splitSections(rawLines):
     return sections
 ```
 This happens until either a new section is hit, in which case the process is repeated, or an EOF (end of file) is met. At this point, we add the last line to the current section and finally return the dictionary. The section dictionary now consists of all sections with the lines that belong to it. The compiler also added metadata to the instructions file. The interpreter has no need for these, so the interpreter deletes them if a metadata section is found:
-```Python
+```python
 def removeMetadata(sections):
 	# If, for some reason, there is no metadata
 	# in the file, we don't have to remove them
@@ -2558,7 +2558,7 @@ def removeMetadata(sections):
 ## A„string replacement“ dictionary (Level 3)
 
 A function call may look like this: `0, 0, put, "Hello, friend!"`. To us humans, it is clear that there is one argument, namely `"hello, world!"`. However, the interpreter might take the comma not as a part of the string but as a delimiter between two arguments, thus making the two arguments passed `"hello` and ` world!"`. We have previously faced this exact dilemma in the compiler. In this level, we want to fix this issue of special characters in strings messing with the parsing of the line. Here is an instruction before and after this level:
-```Python
+```python
 # Here is an instruction:
 [0, 1, put, "Hello, friend!"]
 # The comma between Hello and friend could be
@@ -2577,7 +2577,7 @@ As long as the reference does not include any special characters itself, all the
 
 
 In this level, we will create two functions, one to iterate through all lines and another to replace all string arguments. The only caveat of iterating through the lines now is that we must iterate both overall sections and then over all the lines contained within them. This will be done in the `removeStrings` function:
-```Python
+```python
 def removeStrings(sections, stringList):
 	# Go through every section
     for section, lines in sections.items():
@@ -2592,7 +2592,7 @@ def removeStrings(sections, stringList):
 `removeStrings` will then call a new function, `stringRemover` on every line. It is the task of `stringRemover` to replace the strings with placeholders. Every string is replaced by a reference using the format "`STR[X]`", whereby `[X]` is a counter that keeps incrementing by one for each string that is replaced so that no two strings can ever be replaced by the same reference. Once their replacement has been made, we will have to identify all strings in the line. We first save their contents as we need to reinsert them later. Then, we can replace them in the line with their respective placeholders. We must also connect each placeholder with the string it represents. If we did not do so, we would have no way of knowing which placeholder is meant to replace which string.
 
 As a first step, we must find out how many strings there are in a given line, which we do using the following code snippet: 
-```Python
+```python
 # // acts like a normal divide (/)
 # However, if the result is a float, it gets
 # rounded down into an integer
@@ -2601,7 +2601,7 @@ line.count('"')//2
 It divides the number of quotes in the line by two, as every string must be composed of one quote to start the string and another one to end it. Since we want to remove all strings but can only replace one string at a time, we must repeat this replacement process for every string. Luckily, we have just found the number of strings in the line and, as such, the amount of times the replacement process must happen. 
 
 First, we create the reference to be inserted later. The strings ID will be the number of strings already found plus one:
-```Python
+```python
 def stringRemover(stringList, line):
     string = None
     for _ in range(line.count('"')//2):
@@ -2615,7 +2615,7 @@ def stringRemover(stringList, line):
         stringEntry = f"str{len(stringList)+1}"
 ```
 We can then use the `findStrings` function to find the start and end of the first string of the line. Note that each time the replacement process happens, the second string will become the first, as the previously first one was replaced:
-```Python
+```python
 def findStrings(line):
 	# If there are not two quotes in the line,
 	# we can return 0 as the index of the 
@@ -2632,18 +2632,18 @@ def findStrings(line):
     return 0, 0
 ```
 Let us look at `line[first+1:].index('"')+first+1` to understand why this gives us the location of the second quote in the line. To do this, we can take the following line as an example: `put("hello")`. First, we remove everything behind and including the opening quote from the line like so:
-```Python
+```python
 hello")
 ```
 This means that the previously second quote has now become the first quote in the line. We can, therefore, also get its index using the `index` function:
-```Python
+```python
 hello")
 #    5
 # Index will tell us that the second quote is at
 # index 5.
 ```
 It should be noted that this was not possible earlier as `index` only returns the index of the first occurrence of the characters it is supposed to retrieve. This closing quote only has this index since we have removed everything before the opening quote earlier. We, therefore, must add the length of the characters we removed to this index in order to retrieve the index in the complete line:
-```Python
+```python
 # Our current index:
 hello")
 #    5 
@@ -2661,7 +2661,7 @@ put("
 ```
 
 Using the start and ending positions of the string, we can copy its contents by reading all characters in between them:
-```Python
+```python
 def stringRemover(stringList, line):
     string = None
     for _ in range(line.count('"')//2):
@@ -2672,7 +2672,7 @@ def stringRemover(stringList, line):
         string = line[start:stop]+'"'
 ```
 At this point, we must replace the string with its placeholder. We can do this by taking everything to the left of the string and adding the reference to the end of that. We can then take everything to the right of the string and add that to the end. We can then set the line's content to be this new version:
-```Python
+```python
 def stringRemover(stringList, line):
     [...]
     for _ in range(line.count('"')//2):
@@ -2684,7 +2684,7 @@ def stringRemover(stringList, line):
         line = line[:start]+ stringEntry + line[stop+1:]
 ```
 Finally, we must save the string and store it with its reference. Without doing this, we could not insert the string back when it needs to be used during instruction execution. To do this, we can use the reference to the string as a key and the string as a value in the dictionary `stringList`. `stringList` will then hold these values until they can be reinserted back safely later:
-```Python
+```python
 def stringRemover(stringList, line):
     for _ in range(line.count('"')//2):
         [...]
@@ -2705,19 +2705,19 @@ Once again, we must only access every line individually and then separate all wo
   
 
 The function responsible for performing all actions in this level is `splitUp`. It first goes through all sections and stores the lines they contain in the `lines` variable:
-```Python
+```python
 def splitUp(sections):
     for section, lines in sections.items():
 	    [...]
 ```
 The function then goes through each line in `lines` and calls the `split` method on it. As a quick reminder: this method takes a string like `"1&2&3"` and cuts it up into a list based on a character or word of your choosing: 
-```Python
+```python
 "1&2&3".split("&")
 # will become
 ["1", "2", "3"]
 ```
 However, the list that is returned when we split up each line still has elements with trailing or leading whitespaces. When splitting the line: `0, 1, put, 1` we receive `["0", " 1", " put", " 1"]` instead of `["0", "1", "put", "1"]`. This could cause problems in the future (e.g: `"True" != " True"`), so we want to eliminate all of these unnecessary spaces. We can do this by iterating through each token and replacing it with a variant of itself that had the `.strip()` method called on it. This removes said spaces, leaving us with only the visible characters that we want:
-```Python
+```python
 def splitUp(sections):
     for section, lines in sections.items():
 	    # This may look very confusing at first
@@ -2736,7 +2736,7 @@ This new list of lines broken down into tokens is then saved to its section, rep
 ## Inserting strings (Level 5)
 
 After having taken out strings to make the previous level easier on ourselves, we must now reinsert them into each instruction. This is important so that scripts output the intended strings rather than their placeholders. This step is essentially the reversal of level three of the interpreter. As we have already finished all operations that may be disrupted by certain characters in strings during the previous level, it is now safe to reintroduce them in a safe environment. We can also now safely turn any `&QUOTE` references back into quote characters. Here is a visualization of this level:
-```Python
+```python
 # Here is an instruction:
 [0, 1, put, str1]
 # Here is the same instruction with the string reinserted:
@@ -2748,7 +2748,7 @@ To insert the strings back in, we iterate over every word in a line and see if i
 
   
 We must first create another function, `addStrings`, which iterates over all sections and all lines within them:
-```Python
+```python
 def addStrings(sections: dict, stringList: dict):
     # Go through every section and store its lines
     # in the 'lines' variable
@@ -2762,7 +2762,7 @@ def addStrings(sections: dict, stringList: dict):
     return sections
 ```
 `addStrings` merely goes through each line and calls `stringAdder`; it is this latter function that actually inserts strings back into each line. It goes through each word in the line and checks whether it is contained in the keys of stringList. If it is, `stringAdder` can be sure that the word is a replacement for a string:
-```Python
+```python
 def stringAdder(line: str, stringList: dict):
 	# for every word in the line
     for index, word in enumerate(line):
@@ -2773,7 +2773,7 @@ def stringAdder(line: str, stringList: dict):
     return line
 ```
 If this is the case, we overwrite the word in the line list with the string it replaces. We also call the `replace` method on the string, replacing all instances of `&QUOTE` that we inserted during compilation with an actual quote character. This reverts "`He said: &QUOTE Hello! &QUOTE`" back to "`He said: "Hello!"`". Here is the full code for `stringAdder`, including this final bit of functionality:
-```Python
+```python
 def stringAdder(line: str, stringList: dict):
     for index, word in enumerate(line):
         if word in stringList.keys():
@@ -2802,7 +2802,7 @@ As of right now, the words/"tokens" in each instruction are strings stored withi
 At this point, it may be useful to introduce what objects are in Python quickly. An object is like a "thing" that stores data and has actions you can perform on that data. For example, consider a "pet" object. The pet object can contain data like what type of animal and breed it is, along with other information like its color and how hungry it is. One object can, therefore, carry lots of data describing it, which can come in very handy. Additionally, this "pet" object can perform actions like "eat", which will decrease the hunger of the cat. We have already come across these "actions" before: methods. When we call `"Hello, friend!".split(",")`, we are calling the `split` method on a string object (`"Hello, friend!"`). 
 
 This can also be applied to the tokens we are dealing with now. If a programmer writes `"hello" + 1`, this operation should not work, as you cannot add a string to an integer. Therefore, the `add` function must check whether the values being added have "compatible" types. If the values are objects, this can be as simple as comparing the following:
-```Python
+```python
 # If valueOne and valueTwo are both Token objects,
 # we can find out their type by adding ".type" to
 # to the end of them like so:
@@ -2826,7 +2826,7 @@ In order to tell Python what kind of data a token object should store in its *at
 
 
 In the `__init__` method of a class, it is usually defined what *attributes* the objects will have. The Tokens have the `__init__` method defined to take in a value and (optionally) a type as arguments. The attribute for the value is set equal to the passed value. If a type was passed, we can set the `type` *attribute* equal to that as well:
-```Python
+```python
 # Here is how one can create a new Token object:
 t = Token("Hello!")
 # The variable "t" now contains a Token object
@@ -2848,7 +2848,7 @@ class Token():
         self.type = None
 ```
 If the type parameter is empty (`Token("Hi")` instead of `Token("Hi", "string")`, we must detect the type automatically by running our value through the detection algorithm. If a type was manually provided, we can set the type attribute equal to that:
-```Python
+```python
 class Token():
     def __init__(self, value: str, type=None ):
         if not type: # If the type was not defined:
@@ -2860,13 +2860,13 @@ class Token():
 ```
 
 The detection algorithm works as follows, running the following checks against the value in this order. First, the value is turned into a string, and all trailing and leading spaces are removed:
-```Python
+```python
 def detect(self):
 	[...]
 	value = str(self.value).strip()
 ```
 1) If it only consists of numbers and one dot symbol (".") it is a float:
-   ```Python
+   ```python
    def detect(self):
         [...]
         value = str(self.value).strip()
@@ -2876,7 +2876,7 @@ def detect(self):
             self.type = "float"
    ```
 2) But if it only consists of numbers without the dot, it's an integer
-   ```Python
+   ```python
    def detect(self):
         [...]
         value = str(self.value).strip()
@@ -2891,7 +2891,7 @@ def detect(self):
                 return
    ```
 3) Values, both starting and ending with quotes, are strings. The quotes are then removed from the value
-   ```Python
+   ```python
    def detect(self):
         [...]
         value = str(self.value).strip()
@@ -2907,7 +2907,7 @@ def detect(self):
             return
    ```
 4) If the value is identical to the string "`None`", it's a nonetype:
-   ```Python
+   ```python
    def detect(self):
         [...]
         value = str(self.value).strip()
@@ -2922,7 +2922,7 @@ def detect(self):
             return
    ```
 5) If the value is either `true` or `false`, it is a boolean
-   ```Python
+   ```python
    def detect(self):
         [...]
         value = str(self.value).strip()
@@ -2939,7 +2939,7 @@ def detect(self):
             return
    ```
 6) If all checks fail, then it is either a function or a variable. However, in NoBash, functions count as variables, so their type is set accordingly:
-   ```Python
+   ```python
    def detect(self):
         [...]
         value = str(self.value).strip()
@@ -2974,11 +2974,11 @@ def detect(self):
    ```
 
 It should be noted that there are still other types, such as the `list` or `dict` type, but these can only be instantiated by calling a function rather than being written out in code like strings or integers. Additionally, their type must be implicitly stated when the token is created. For example, here is how to create a list in NoBash:
-```Python
+```python
 l = list(1, 2, 3)
 ```
 The `list` function responsible for creating the list would use the following code to do so, declaring the "list" type in the second argument:
-```Python
+```python
 Token([1, 2, 3], "list")
 ```
 
@@ -2991,13 +2991,13 @@ This step, like many of the ones before it, is comprised mostly of iterating ove
   
 
 We must first define a new function, `setTokens`, that takes the section dictionary in as an argument like so:
-```Python
+```python
 def setTokens(sections):
     [...] # Tokenise everything in a line
     return sections
 ```
 We then iterate through each element of each line of each section. Assuming that the current element is saved in a variable called `element`, we then set the item at the current index of the line equal to `Token(element)`. This returns a tokenized version of the value of the element, which is then saved into the line:
-```Python
+```python
 def setTokens(sections: dict):
 	# We first go through every section and store
 	# its lines in the "lines" variable
@@ -3014,7 +3014,7 @@ def setTokens(sections: dict):
     return sections
 ```
 At the end, we make sure that the section dictionary with the modified lines is saved with its new tokenized values:
-```Python
+```python
 def setTokens(sections: dict):
     for section, values in sections.items():
         sections[section] = [...] # Tokenised lines
@@ -3044,7 +3044,7 @@ The FLT file is stored on the computer in the "JSON" format. JSON files can easi
 Firstly, we must create a new file called “`functionTable.json`” and store it in a “`data`” directory. The `data` directory also contains files with other information, such as the version of NoBash installed on the system and a list of all errors that can occur. This folder will pop up again in the future. For example, we need one central location to store libraries the programmer has installed. We can’t spread these out over the system; otherwise, the interpreter would have to look through every file on the computer just to find one library. If all libraries are in one location, the scope of the search for the library is reduced drastically. We save them in the `pylibraries` directory, which, in turn, is located within the `data` directory. 
 
 However, now that the FLT file is created, it currently only exists in the computer's storage with no way to read or write to it within the interpreter. Just as we had to read the instructions file in level one of the interpreter, we must now create a function that lets us load the FLT file's content into RAM. Additionally, it should be loaded into a format we can easily work with. We will use a dictionary to store the FLT as they make retrieving specific pieces of information simple. We can make use of the JSON library to work with the file easily. We effectively just read the contents of the file and have the JSON library turn it into a dictionary, which we then save to the `flt` variable:
-```Python
+```python
 def loadFLT() -> dict:
     try: 
 	    # The flt is always stored in .nobash, which,
@@ -3081,7 +3081,7 @@ As for the functions pertaining to getting data out of the FLT: We need two func
 
 NoBash functions, which are written by the programmer, are added to the FLT as follows:
 1) First, every function definition is iterated over in the section:
-   ```Python
+   ```python
 def addNbFunctions(functions):
 	# Go through every function defined 
 	# in the functions section
@@ -3089,7 +3089,7 @@ def addNbFunctions(functions):
 	    [...]
    ```
 2) Its name is then added as a key to the FLT dictionary, with the corresponding value being a new dictionary. If we look at a NoBash function definition, we can tell that the function name is always the first value and its starting instruction the second: `name, instruction, arg1, arg2, ...`
-   ```Python
+   ```python
 def addNbFunctions(functions):
     for func in functions:
 	    # Function definitions must contain
@@ -3111,7 +3111,7 @@ def addNbFunctions(functions):
         flt[funcName] = {}
    ```
 3) This dictionary then stores all the details of the function. The starting instruction number and the language (this being "NoBash" here) the function was written are both stored here. Any potential arguments‘ names are also stored in a list:
-   ```Python
+   ```python
 def addNbFunctions(functions):
     for func in functions:
         if len(func) < 2:
@@ -3137,7 +3137,7 @@ def addNbFunctions(functions):
    ```
 Python libraries and the functions they contain are added differently:
 1) The function `importPyLib` imports the library so that we can access and run the functions it contains. Normally, libraries are imported in Python by writing "`import library`". We cannot do this here, as the library name will always change and is stored in a string. We will, therefore, need to use a different method to import libraries, which accepts the library's name in the form of a string.
-  ```Python
+  ```python
   def importPyLib(libName, location):
     try:
 	    # First, we add the home directory of
@@ -3158,7 +3158,7 @@ Python libraries and the functions they contain are added differently:
         error(74, [libName, e])
   ```
 2) This library is then stored in an object. We must store this object so that we can call functions from it later. We will use the `pyLibs` dictionary to do this.
-   ```Python
+   ```python
    def importPyLib(libName, location):
     try:
         location = path.expanduser(location)
@@ -3173,7 +3173,7 @@ Python libraries and the functions they contain are added differently:
         error(74, [libName, e])
    ```
 3) We can then go through every function defined in the imported library and add it to the FLT. As with the NoBash functions, we will use the function's name as a key and a new dictionary as the value. Inside the dictionary, we will store that the function was written in Python and the name of the library it originates from.
-   ```Python
+   ```python
 def addPyFuncs(libName):
 	# libName contains the library's name
 	# We, therefore, get the library object
@@ -3208,7 +3208,7 @@ The system NoBash uses was heavily inspired by the assembly "language". In assem
 This level, although very important, does not require a lot of code. We must create a "RIP" and a function that runs in an endless loop. Inside the loop, we first run whatever instruction the RIP is pointing at and subsequently increase the RIP to point at the next instruction. Executing functions and thus jumping to arbitrary locations is beyond the scope of this level, so we will only increment the RIP by one for now. Looping indefinitely, we grab the information stored in the FLT for the current instruction. If the instruction number is impossible, like being smaller than zero or is larger than the list of instructions, we must throw an error. 
 
 Last but not least, there is one last complication we must fight with. Let us imagine a scenario in which a function is called, so we set the RIP to its starting location. Once we are done executing the function, we must jump back to the line the function is called from, but the old RIP containing this information has been overwritten by now. We can solve this issue by turning our RIP into a list and letting it carry several locations at once. When we want to jump into a function, we can add the new location to the end of the RIP list. The interpreter will check the last item of the RIP and move into this function. When we reach the end of the function indicated by a call to `__funcReturn__`, we may remove the last element of the RIP. This will put us right back to where the function was called. Here is an example of this:
-```Python
+```python
 # Instructions:
 0, 1, add, 1, 2
 1, 2, jumpToMe
@@ -3256,11 +3256,11 @@ If we need to change the RIP in any other case, even when we jump around during 
 The very first step here will be creating the RIP. We will store the multiple instruction numbers within a list, so we can initialize the RIP to be a list with a `0` inside of it, as we always want to start with the first instruction (which has an instruction number of zero). Circular imports might be a small issue that could arise. The entire NoBash project is not one big Python file but several files. One file, `A`, may contain code related to running functions, and another file, `B`, is dedicated to error handling. When something goes wrong during function execution, `A` requires the functionality stored within `B`. `A` will, therefore, import `B`, thereby getting access to its functions. This is typically no problem. When `A` imports `B` and `B` imports `A`, however, we have created a "circular import". File `A` needs file `B` to run and vice versa, creating a metaphorical gridlock. Multiple files require access to `RIP`, so in order to avoid circular imports, we must store the RIP in a file that does not import anything else. We will call this file `globalSGT.py`. 
 
 We first create a new file and initialize the RIP in it:
-```Python
+```python
 RIP = [0]
 ```
 Once this is done, we must create two functions that are key to having the RIP work correctly: `lastRIP` and `advanceRIP`. The first function simply checks to see if the RIP list is not empty and returns the last element or throws an error accordingly. This function will always be used to get the last instruction number from the RIP:
-```Python
+```python
 def lastRIP():
 	# If the RIP is not empty...
     if len(RIP) >= 1:
@@ -3270,7 +3270,7 @@ def lastRIP():
     error(51)
 ```
 The `__advanceRIP__` function takes in three arguments: the RIP before the current instruction was executed, the RIP after the instruction was executed, and the amount of all instructions. If a function was called, then the RIP would have changed from its previous value before the instruction was executed. In this case, the RIP was changed already to the start of the function, and the RIP does not have to be changed by `__advanceRIP__`. If, instead, the RIP remained the same, then no function was called, and we can increase the last value of the RIP by one to progress to the next instruction in order. As another error check, we also make sure that we don't try to set the last RIP value to an instruction that does not exist. This is to prevent us from jumping to the 20th instruction in a 10-instruction-long program:
-```Python
+```python
 # prevRIP = the RIP before the instruction was ran
 # instructionsLen = how many instructions there are
 # RIP = the current RIP after the instruction was ran
@@ -3289,7 +3289,7 @@ def advanceRIP(prevRIP, instructionsLen, RIP):
         error(1010, RIP[-1])
 ```
 Another two functions we will need are `extractSections` and `getInstruction`. The first function's job is to extract the `instructions` and the `functions` section and store them in individual variables for easier access:
-```Python
+```python
 def extractSections(sections):
 	# If there are no instructions to run, like
 	# when executing an empty script, we can
@@ -3309,7 +3309,7 @@ def extractSections(sections):
     return sections["Instructions"], functions, bracesInfo, ifChains
 ```
 The second function gets the last element from the RIP (so, the next instruction's number) and returns the instruction with that instruction number:
-```Python
+```python
 def getInstruction(instructions):
     if instructions:
 	    # We get the last value in the RIP
@@ -3330,7 +3330,7 @@ We now create a new function, `getDetails`, which formats the instructions more 
 `getDetails` will take these arguments, put them into a list, and store that list at the end of the instruction like this:
 `[0, 0, test, [arg1, arg2]]` 
 This format will be easier to work with, as we can be sure that the fourth item in an instruction will always be a list of arguments. Previously, it was a bit more difficult to determine how many arguments (if any at all) an instruction contained. Here is the code of the function:
-```Python
+```python
 def getDetails(instruction):
 	# If the instruction list does not contain at 
 	# least three items, it is formatted wrong
@@ -3362,7 +3362,7 @@ def getDetails(instruction):
 ```
 
 Finally, we create an infinite loop to tie this all together. A script should not run indefinitely, which would normally be the case with an infinite loop. However, we also do not know how often we want to run instructions, as instructions may be repeated in the case of `while` or `for` loops. Instead, NoBash script files have a call to the "`__exit__`" function at the end of them. Once all instructions were run, the `__exit__` function will be run. The function shuts down the interpreter. While the interpreter is running, this while loop is essentially run forever. Inside this loop, we first store the current value of the RIP in a new variable in order to pass this on to the "`advanceRIP`" function, as explained earlier. We can then get the current instruction, get its details in a nice list, and finally increment the RIP by one (with the functionality for making the RIP work with functions already created but not used currently). In later levels, we will add function-execution here as well.
-```Python
+```python
 def runInstructions(sections: dict):
 	# Save all the sections in separate variables
     instructions, functions, bracesInfo, ifChains = extractSections(sections)
@@ -3395,7 +3395,7 @@ As a first step, we will create a system that detects whether a function is writ
 
 As a very first step, we will create a `isPyFunction` function, which tells us whether a function with a given name was written in Python or not. In this function, we first check whether or not a function with that name exists. If it does, we look it up in the FLT, which gives us a lot of information, including what language it was written in. Using a simple `if`
 condition, we can then return `True` or `False`, depending on whether the language was Python or not:
-```Python
+```python
 def isPyFunction(functionName):
 	# Only continue if the function is stored
 	# in the FLT.
@@ -3421,7 +3421,7 @@ def isPyFunction(functionName):
 ```
 
 Once we have established that we are working with a Python function, we must retrieve the Python library's object from the `pyLibs` dictionary, which we have previously defined in level 8. The library's object is stored with its name as a key. The name of the library can be retrieved from the FLT. The interpreter can, therefore, look up the function in the FLT to get the library's name, which can then, in turn, be used to get the library object from the `pyLibs` dictionary:
-```Python
+```python
 def getFuncLibraryName(funcName):
     try:
 	    # Get the data on a function from the FLT.
@@ -3451,7 +3451,7 @@ def getFuncLibrary(funcName):
 ```
 
 Once we have the library, we can use the built-in function `getattr`, which retrieves the function object from a given library object and the function's name. We can store this function object in a variable "`func`" and call it using "`func()`" assuming that there are no arguments being passed. This can be visualized using the following example:
-```Python
+```python
 # In this Python code example, we first get the 
 # function "hello" from a library and then execute it 
 # on the next line. In this example, the variable 
@@ -3462,7 +3462,7 @@ func()
 
 
 If we do end up passing arguments, we must watch out. Since we have all arguments stored in a list, it would not be too far-fetched to pass them to the function as follows:
-```Python
+```python
 # Problem:
 func("argument one", "argument two")
 
@@ -3474,7 +3474,7 @@ arguments = ["argument one", "argument two"]
 func(arguments)
 ``` 
 However, instead of performing `func(a, b, c)`, we would actually call `func([a, b, c])`. This means that instead of passing three arguments, we instead pass a list with three items inside, which is not the same. We can solve this by "unpacking" the list of parameters. This can be done by prepending an asterisk ("\*") to the list. Unpacking allows you to assign each item of a list to multiple variables at once. Here is the previous example finished with the "correct" solution:
-```Python
+```python
 # Correct:
 arguments = ["argument one", "argument two"]
 func(*arguments)
@@ -3486,7 +3486,7 @@ func(argumentOne, argumentTwo)
 ```
 
 Because we are calling a Python function, we can return whatever the called function returned back to the `runInstructions` function. If a programmer does not specify a value a function should return, it returns `None` automatically. Because of this, functions always return something, so NoBash does not have to check whether or not a function returns anything. It can just pass on the return value, which will not cause any errors as there will always be one, either `None` or one specified by the programmer. Here is the `callPyFunction` function, which will tie everything we did in this level together:
-```Python
+```python
 def callPyFunction(functionName, arguments):
 	# Get the libraries object first
     lib = getFuncLibrary(functionName)
@@ -3530,14 +3530,14 @@ def callPyFunction(functionName, arguments):
 ## Returned values (Level 11)
 In this step, we are essentially creating the basics of a variable system. A line in a normal NoBash script may look as follows: "`put(add(1, 2))`", where `add(1, 2)` returns 3, and this result is output to the screen. By breaking this statement up into instructions, we would have something like this:
 
-```Python
+```python
 0, 1, add, 1, 2
 1, 1, put, RET0 
 ```
 
 In this case, `RET0` stands for anything that is returned by the instruction number zero. This removes a lot of difficulties as we can now simply execute one instruction at a time without worrying about what function should be executed first and where the returned values should be passed on to. This is the system that NoBash uses, as limiting oneself to one function call per instruction is easier to denote syntactically and easier to work with on an interpreter level, at the cost of making the compiler slightly harder to create. What we still need are two things: 
 - A system to store the returned values from a given instruction:
-  ```Python
+  ```python
   # Instruction:
   0, 1, add, 1, 2
   
@@ -3545,7 +3545,7 @@ In this case, `RET0` stands for anything that is returned by the instruction num
   ret0 = add(1, 2)
   ```
 - A system that replaces the reference to a return value with the actual value that was returned during execution. 
-  ```Python
+  ```python
   0, 1, add, 1, 2
   1, 2, put, ret0 
   # Put should not literally output "ret0", but should
@@ -3579,11 +3579,11 @@ This would not work, because, under the hood, fee returns a list. This makes the
 
   
 To begin this level, we first create a new dictionary to store variables in, including the returned value variable (RVV):
-```Python
+```python
 vars = {}
 ```
 The first function we must make is one that sets a value in this variables dictionary to the corresponding key. In this case, the key is the variable's name, and the value is the actual value of the variable. This lets us easily look up the value of a RVV:
-```Python
+```python
 def setVar(varName, varVal, [...]):
     [...]
     # Inside of the vars dictionary, we set save
@@ -3591,7 +3591,7 @@ def setVar(varName, varVal, [...]):
     vars[varName] = varVal
 ```
 As a quick reminder: RVVs are always set up as follows: `ret#`, where `#` is the number of the instruction that returned the value. We can now create a second function that handles creating the RVVs following this format:
-```Python
+```python
 def setRetVars(varVal):
 	# If there is no value being passed, do
 	# nothing
@@ -3607,7 +3607,7 @@ def setRetVars(varVal):
     setVar(varName, varVal, [...])
 ```
 As previously described, multiple return values are automatically stored in a list. This list is then returned and stored as an RVV. As for replacing RVVs passed as arguments with their actual values, we must create a new function that takes in all arguments. It then checks whether an argument is actually variable, and, if so, replaces it with its actual value. Here is a visualization of the process:
-```Python
+```python
 # Instruction:
 0, 1, add, 1, 2
 1, 2, add, 3, ret0
@@ -3627,7 +3627,7 @@ As previously described, multiple return values are automatically stored in a li
 1, 2, add, 3, 2
 ```
 This is done by the `replaceVars` function, which is a bit more complicated than the other functions. First of all, it takes the list of arguments and the function's name as an argument. At the very beginning, we initialize a variable `newArgs` and set it equal to an empty dictionary. `newArgs` will contain all the new arguments, in which the variables were converted into the values they represent. The function then iterates through all arguments and checks whether their type is "`variable`". If so, we call the `getVar` function (that we will create next) and pass the variable as an argument. As its name suggests, the `getVar` function returns the value being represented by whatever variable was passed on to it. We then append the value of the variable or the original argument to `newArgs`. Additionally, we will run into problems when replacing the variables in the arguments of functions like `__setVariable__`. Here is an explanation of why this could cause issues:
-```Python 
+```python 
 # ___setVariable__ is the function equivalent of =
 
 x = 2
@@ -3642,7 +3642,7 @@ x = 2
 # responsible for setting the variable.
 ```
 We can get around this problem by adding a `start` counter. If the arguments are being replaced for a function that is meant to set variables, we can tell `replaceVars` not to replace variables that may just be defined. `replaceVars` will only replace arguments past `start`. If the first argument might be a new variable, we can set `start` to two. This will force the interpreter to only replace arguments two and onward. Here is the code:
-```Python
+```python
 def replaceVars(arguments, funcName):
 	# newArgs will contain the new arguments for now
     newArgs = []
@@ -3677,7 +3677,7 @@ def replaceVars(arguments, funcName):
     return newArgs
 ```
 We still need to implement `getVar`. It will be responsible for getting the respective value from a variable. As already mentioned, it accepts one argument, this being the variable as a token. We then check whether or not the name of the variable is stored in the `vars` dictionary as a key. If it was, we return the token that the variable's name was pointing to. If it was not, the programmer was attempting to use a variable that they had not declared before. In that case, we must throw an error:
-```Python 
+```python 
 def hasVar(varName):
     # hasVar works slightly differently
     # to what is shown here. This will be further
@@ -3740,7 +3740,7 @@ Similarly to level 11, our first step is to establish whether the function was a
 
 
 We first create a function "`isNbFunction`", which takes the function's name as a parameter. If the function is found in the FLT and information on its language is stored, we can now run an `if` check on whether the function's language is equal to `"nobash"` and return the result as a boolean:
-```Python
+```python
 def isNbFunction(functionName):
 	# Continue if the function is actually
 	# stored in the FLT
@@ -3765,7 +3765,7 @@ def isNbFunction(functionName):
         error(72, functionName)
 ```
 We then create a function called `callNbFunction`. If the previous check evaluated to `True`, we pass it the function's name and its parameters. We then look up the function's name in the FLT and store the instruction number at which the function starts. Now the instruction number is appended to the RIP and the functions name to the `funcNameRIP`. 
-```Python
+```python
 def getNbFuncLine(functionName):
 	# Given a NoBash function's name, we look
 	# up what instruction it starts at. This
@@ -3800,7 +3800,7 @@ addOne(false)
 When the function `addOne` is run for the first time, `end` is `false`. It will then create a new variable, `x`, and set it equal to `0`. The function then calls itself but sets the `end` argument to `true`. Now, in a programming language that does not consider "function instance scopes", `x` would be incremented by one. In this scenario, `x` was created when the function was called for the first time. Additionally, when the second function is called the second time, it can access the variable from when it was created in the first instance. This can potentially create bugs if the programmer is not aware that the language does not feature scoping (which could be seen as reasonable as many popular programming languages do have it). Additionally, bugs originating from this misunderstanding can become very tricky to debug. If the programming language does feature function instance scoping, this program will throw an error. When `x` was created, this was done in a different instance of the function, and therefore, the second instance has no knowledge of its existence. Even though this results in the program crashing, this is beneficial. The crash is caused by the variable being scoped to a different instance. In the other scenario, the program would not crash, but it would presumably not function properly. This malfunctioning would be harder to trace back to the scoping as the missing crash does not deliver valuable information about the problem. Having values "transcend" their instance into subsequent ones can be useful sometimes, but this can also be done by passing it as an argument.  
 
 NoBash solves this problem by scanning the `funcNameRIP` for other calls to this same function and incrementing a number attached to the end of the name for every additional call to the same function. Calling a function `foo` twice would make the `funcNameRIP` look like this: `["main", "foo0", "foo1"]`. `main` is not a function. Instead, it represents the global scope, the part of the code outside of any functions. The current instance is always at the end of the list. This way, variables created in the second instance of `foo` would be saved in the `vars` dictionary under the `foo1` scope. Instead of saving variables to the vars dictionary directly (e.g: `{"x": 1, "y": 2}`), we now save them under their respective scope in the `vars` dictionary (e.g: `{"main": {"x": 1}, "foo": {"y": 2}}`). When we try to access variables in the future, we will try to look for the variable in the current scope. This is stored at the end of the list. If a variable is created in the first instance of the function `foo`, it will correspondingly also be saved under the scope `foo0`. When a second instance of the function is created (`foo1`) and the variable needs to be accessed, the interpreter will only search for it in the scope of `foo1`. The code responsible for dealing with scopes is the following:
-```Python
+```python
 # This function will create a new scope name to
 # be added to funcNameRIP when a function is called
 def newScopeName(funcName):
@@ -3846,7 +3846,7 @@ x = 1
 y = 2
 ```
 Here is the code responsible for this action:
-```Python
+```python
 # This function handles passing arguments to
 # NoBash functions:
 def passNbParameters(arguments, scope):
@@ -3885,7 +3885,7 @@ def passNbParameters(arguments, scope):
         error(91, [len(arguments), 0])
 ```
 If we don't try to pass any arguments, we also run these same checks but don't create any variables. We must make sure that the programmer only passes no arguments when the function in question also does not expect any:
-```Python
+```python
 def callNbFunction(functionName, arguments):
     [...]
     # If the programmer tries to pass arguments,
@@ -3939,13 +3939,13 @@ put(b) // 2
 put(c) // 2
 ```
 However, we must use the second last `RIP` value as an identifier for the RVV since that is where the function was called from. Similarly, we also don't set the instance of the current function as a scope but instead use the second last scope stored in `funcNameRIP`, since the goal of returning a value is to save it as an RVV of the instruction (in another scope) that called the function. Finally, we remove the last elements from the `RIP` and `funcNameRIP`, respectively, as we want to execute the instructions after the function call and return to the scope of these:
-```Python
+```python
 0, 1, hello        # Hello returns a value
 1, 2, put, ret0    # We want ret0, not where the 
 # return function was called
 ```
 The code for `__funcReturn__` therefore looks like this:
-```Python
+```python
 def __funcReturn__(*values):
 	# If one value is to be returned
     if len(values) == 1:
@@ -3991,7 +3991,7 @@ The already created the `setVar` function in level 12 has all the required funct
   
 
 First, we must import the `setVar` function into `corefuncs.py`. We can then create a new function, `__setVariable__`, which takes in two parameters: The variable's name and the value that should be assigned to it. It then calls `setVar`, which takes the same two parameters and passes the arguments it has received on. If a list is passed into the function, we have to run some special checks. If the programmer wants to save the list in a single variable, we can do so as normal. If, however, the programmer wants to save each value in the list in a separate variable, we must handle that accordingly:
-```Python
+```python
 def __setVariable__(*varsAndValues):
 	# Throw an error if we have not received
 	# at least one variable name and value
@@ -4032,7 +4032,7 @@ The final puzzle piece missing are functions we can call. After all, what is the
 Unfortunately, going through every function and discussing how it works would take too long. Instead, we should focus on how these functions work, generally speaking rather than individually. The standard functions typically take an input, transform it, and produce an output. Important to note here is that while the input and output of these functions are tokens, they are turned into traditional Python values to be worked with inside of the functions. After the result is calculated, we can turn that back into a token and return the tokenized value. This ensures that the interpreter only ever deals with tokens and not the standard Python types. The coreutils work by primarily using the functionality of the `shutil` library. This library has implemented a lot of the coreutils already. This means that the core util functions must analyze what the programmer wants to do and call the `shutil` functions accordingly.
 
 Let's go through the creation process of one standard function and one core utility function. For the standard function, we will look at how the `add` function works. When two numbers are passed to the `add` function, we will want the result of a simple addition of the two. When two strings are passed, however, we want to add the latter to the end of the first. For example, `"Hello, "` and `"friend!"` added together would result in `"Hello, friend!"`. The `add` function represents the standard functions well, as we can see tokens being passed as arguments and returned out of the function. Inside of the function, we work with traditional Python values. Here is the code:
-```Python
+```python
 # Add takes two arguments: The value to the left
 # of the "+" and the value to the right.
 def add(x, y):
@@ -4061,7 +4061,7 @@ def add(x, y):
     error(305, [x.type, y.type])
 ```
 A very important core util is the `mv` command. It will accept two arguments, the first one being a file and the second a directory like so: `mv("test.txt", "Documents/")`. It will then move the file to the specified location. Let's look at the code behind the function:
-```Python
+```python
 def mv(source, destination):
 	# First, we make sure that the source and 
 	# desitination are both tokens. If they are, 
