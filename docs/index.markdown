@@ -4138,6 +4138,7 @@ The most important lessons I learned were planning ahead when programming and sp
 
 
   
-
+# Word of honor
+![](Ehrenwort.jpg)
   
 
