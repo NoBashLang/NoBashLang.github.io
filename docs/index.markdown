@@ -27,6 +27,11 @@ Co-supervisor: Anna Höpli
 
 ----
 
+# Table of contents
+{:toc}
+
+
+
 # Introduction
 The PC operating system market space is dominated by Windows and MacOS, leaving very little room for competition. Still, there is a very small minority of PC users which prefer to run Linux, though this still has not made a dent in the current duopoly held by Windows and MacOS. When looking at servers, Linux catches up and is considered a very popular choice. Some more tech-literate users like to automate frequent tasks by using small programs they create. Instead of spending ten seconds doing something every day, they instead spend five minutes writing a small "script" (or program) which will do said task for them in the future. I personally have written such scripts before, such as a small program which automatically deletes old screenshots which I no longer need. Bash is the most popular programming language for performing simple, everyday tasks on Linux. Bash has a very tight integration with Linux, making it much easier to perform common administrative tasks like creating or moving files, starting various programs when the computer is booted up, or automatically sorting all entries in a table alphabetically. 
 
