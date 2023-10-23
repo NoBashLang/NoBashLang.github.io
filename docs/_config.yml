@@ -25,7 +25,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 #github_username:  jekyll
-
+theme: just-the-docs
 # Build settings
 # theme: minima
 #plugins:
@@ -34,6 +34,9 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 markdown: kramdown
 highlighter: rouge
 remote_theme: "just-the-docs"
+
+aux_links:
+  Template Repository: https://github.com/just-the-docs/just-the-docs-template
 
 kramdown:
   input: GFM
