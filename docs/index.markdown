@@ -1,6 +1,5 @@
 ---
 title: NoBash - Creating a programming language
-toc: true
 ---
 # NoBash - Creating a programming language
 
@@ -29,8 +28,8 @@ Co-supervisor: Anna Höpli
 ----
 
 # Table of contents
-{% toc %}
-
+* This will become a table of contents (this text will be scrapped).
+{:toc}
 
 
 # Introduction
