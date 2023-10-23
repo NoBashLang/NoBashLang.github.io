@@ -442,7 +442,7 @@ print("Fives:", countFive)
 
 NoBash is syntactically similar to Python. The only differences are the aforementioned curly braces, some small changes in keywords (defining functions is done with `func` rather than `def`) and lack of methods. In terms of functionality, it borrows heavily from Bash. Everyday operations like reading or creating a file, running a command, or starting an application should be trivial to do. Linux usually comes with the GNU core utils, which are a group of programs like `ls` (which lists the contents of a folder), `cd` (to move inside a folder), or `cat` (which, among other things, reads out a file). NoBash should have built-in functions that act as a bridge between NoBash and the common core-utils, letting programmers efficiently use any of the tools by simply calling a function. It should be as pleasant to write in as Python while being as powerful in Linux as Bash. Here is an overview of how to do a couple of things in NoBash:
 
-```
+```go
 // Comments are started with a double slash
 
 // Functions are called like in Python
@@ -523,7 +523,7 @@ A practical example of this would be the following:
 *Code:*
 `put("Hello, how are you?")`
 *Instructions*
-```
+```go
 0, 1, put, "Hello, how are you?"
 ```
 In the code, a function "put" is called with the string "Hello, how are you?" being passed as a parameter. The "put" function is the equivalent of the Python "print" function. Anything passed as an argument will be out*put* to the screen (hence the name). The interpreter would therefore read this instruction, detect that we are trying to call the `put` function and pass `"Hello, how are you?"` as an argument. It will then perform said action, outputting the string to the screen, before moving on to the next instruction and running that.
@@ -539,7 +539,7 @@ In this example, the `put` function should output the result of adding one and t
 The compiler does not output only raw instructions but also other information important to the script. For example, it must somehow convey on which instruction number a function starts and what parameters it takes. Information must therefore be classified. NoBash uses the approach of "sections". The `Instructions` section contains instructions whereas the `Functions` section contains function definitions. A section is defined using the following format: `# [Section name]`, whereby `[Section name]` is the name of the section. All lines following this definition belong to said section. This continues until either the last line is reached or a new section is defined.
 
 *Code:*
-```js
+```go
 1. put("hello") // Outputs 'Hello' 
 2. put(1 + 3.5) // Would be 'print(1 + 3.5)' in Python
 3. // Note that the interpreter ignores comments
@@ -552,7 +552,7 @@ The compiler does not output only raw instructions but also other information im
 10. put("End of program!")
 ```
 *Instructions:*
-```
+```go
 # Instructions
 0, 1, print, "hello"
 1, 2, add, 1, 3.5
