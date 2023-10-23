@@ -27,12 +27,13 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #github_username:  jekyll
 
 # Build settings
-theme: minima
+# theme: minima
 #plugins:
 #  - jekyll-toc
 #  - jekyll-feed
 markdown: kramdown
 highlighter: rouge
+theme: jekyll-shell-theme
 
 kramdown:
   input: GFM
